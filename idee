@@ -1,0 +1,52 @@
+STRUCTUREE POUR PIECE:
+	char 				id		//	sa lettre d'ariver
+	int 				type	//	(juste sa gometrie il y a 21 possibilite)
+	unsgigned double	piece	//	donne la structure de la piece
+	int 				size_x	//	longeur de la piece
+	int 				size_y	//	hauteur de la piece
+	int 				pos_x	//	position X dans le carre
+	int 				pos_y	//	position Y dans le carre
+
+STRUCTUREE POUR COORDONNE:
+	int	x
+	int y
+
+FONCTION POUR PIECE:
+	-recupere un tableau de char et initialise la piece
+		-on cherche la premier case vide
+			-onlance l'algo recursif bactraking pour trouver les autres conecte
+			-on continue de tout lire pour voir si il n'y en a pas plus (si oui == erreur)
+		-renvoie une erreur si elle en trouve une
+	-decalage haut, bas, gauch, droite.
+
+STRUCTUREE POUR ECRAN:
+
+FONCTION POUR ECRAN:
+	-cree une fenetre de 8 x 8 a partir du terrain et de coordoine de decalage
+		-on fait un masque 
+
+
+
+l11 = 0000  l21 = 0110
+      0110        0010
+l12 = 0101  l22 = 1101
+      0101        1101
+
+var >> 1	: decalage a gauche de une case
+var >> 8	: decalage en haut de une ligne
+
+var << 1	: decalage a droite de une case
+var << 8	: decalage en bas de une ligne
+
+decalage de (x, y) sur l11:
+(siz_x, siz,y) = taille de la fenetre
+result = l11 >> (8 * y + x) | l21 << ((siz_y - y) * 8 - (siz - x))
+		| l21 << (8 * (siz_y - y) - x) | l21 << ((siz_y - y) * 8 + (siz - x))
+
+ALGO RECHERCHE:
+	-on defni une fenettre de recherche
+	-determner le plus petit carrer possible
+	-pour chaque type de piecce on defini le derier endro8it ou il c'est arreter
+
+Faire une generateur de piece:
+
