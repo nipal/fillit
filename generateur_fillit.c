@@ -13,12 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h> 
-
-//	1		2		4		8		0	1	2	3
-//	16		32		64		128		4	5	6	7
-//	256		512		1024	2048	8	9	10	11
-//	4096	8192	16384	32768	12	13	14	15
-
+#include <unistd.h>
 
 void			init_tab_val(unsigned short **tab)
 {
@@ -42,7 +37,7 @@ void			init_tab_val(unsigned short **tab)
 	tab[4][1] = 2;
 	tab[4][2] = 3;
 
-	tab[5][0] = 526;
+	tab[5][0] = 562;
 	tab[5][1] = 2;
 	tab[5][2] = 3;
 
@@ -94,7 +89,7 @@ void			init_tab_val(unsigned short **tab)
 	tab[17][1] = 3;
 	tab[17][2] = 2;
 
-	tab[18][0] = 563;
+	tab[18][0] = 561;
 	tab[18][1] = 2;
 	tab[18][2] = 3;
 }
@@ -105,9 +100,9 @@ unsigned short **init_tab(void)
 	int				i;
 	int				j;
 
-	tab = (unsigned short **)malloc(sizeof(unsigned short*) * 21);
+	tab = (unsigned short **)malloc(sizeof(unsigned short*) * 19);
 	i = 0;
-	while (i < 21)
+	while (i < 19)
 	{
 		tab[i] = (unsigned short *) malloc(sizeof(unsigned short) * 3);
 		if (tab[i])
@@ -125,15 +120,59 @@ unsigned short **init_tab(void)
 	return (tab);
 }
 
-void	print_piece(unsigned short **tab, int nb_piece)
+void	print_piece(unsigned short **tab, int num, int alea)
 {
+	int		decal_x;
+	int		decal_y;
+	short	nb;
+	int		i;
+	int		j;
 
+	if(alea)
+	{
+		decal_x = (rand() %  (4 - tab[num][1] + 1));
+		decal_y = (rand() %  (4 - tab[num][2] + 1));
+		nb = (tab[num][0] << (decal_x + (4 * decal_y))) ;
+	}
+	else
+		nb = tab[num][0];
+	j = 0;
+	while (j < 4)
+	{
+		i = 0;
+		while (i < 4)
+		{
+			if (nb & (1 << (4 * j + i)))
+				write(1, "#", 1);
+			else
+				write(1, ".", 1);
+			i++;
+		}
+		write(1, "\n", 1);
+		j++;
+	}
 }
 
 int	main(int ac, char **av)
 {
 	unsigned short	**tab;
+	int				i;
+	int				piece;
+	int				nb_piece;
 
-	tab = init_tad();
-
+	srand(time(NULL));
+	tab = init_tab();
+	i = 0;
+	if (ac >= 2)
+		nb_piece = atoi(av[1]);
+	else
+		nb_piece = 3;
+	while (i < nb_piece)
+	{
+		piece = rand() % 19;
+		print_piece(tab, piece, 1);
+		if (i < nb_piece - 1)
+			write(1, "\n", 1);
+		i++;
+	}
 }
