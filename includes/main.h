@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_test.c                                        :+:      :+:    :+:   */
+/*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/27 08:49:44 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/27 08:53:22 by fjanoty          ###   ########.fr       */
+/*   Created: 2016/01/27 08:17:12 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/01/27 09:08:54 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef MAIN_H
+# define MAIN_H
 
-int	main(void)
-{
-	ft_putstr("SA MARCHE\n");
-	return (0);
-}
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include "structure.h"
+# include "libft.h"
+
+#endif

@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_test.c                                        :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
+/*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/27 08:49:44 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/27 08:53:22 by fjanoty          ###   ########.fr       */
+/*   Created: 2016/01/05 18:23:53 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/01/27 09:09:05 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "error.h"
 
-int	main(void)
+int				error(int mode)
 {
-	ft_putstr("SA MARCHE\n");
-	return (0);
+	static	int	error = 0;
+
+	if (mode & INIT)
+		return (error = 0);
+	if (mode & SET)
+		return (error = 1);
+	if (mode & GET)
+		return (error);
+	return (error);
 }

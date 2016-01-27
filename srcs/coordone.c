@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_test.c                                        :+:      :+:    :+:   */
+/*   create_coordone.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
+/*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/27 08:49:44 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/27 08:53:22 by fjanoty          ###   ########.fr       */
+/*   Created: 2016/01/05 18:23:53 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/01/27 07:36:32 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "coordone.h"
 
-int	main(void)
+t_coordone		*create_coordone(void)
 {
-	ft_putstr("SA MARCHE\n");
-	return (0);
+	t_coordone	*position;
+
+	if (!(position = (t_coordone*) malloc(sizeof(t_coordone))))
+		return (NULL);
+	position->x = 0;
+	position->y = 0;
+	return (position);
 }

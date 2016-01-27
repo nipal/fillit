@@ -49,4 +49,13 @@ ALGO RECHERCHE:
 	-pour chaque type de piecce on defini le derier endro8it ou il c'est arreter
 
 Faire une generateur de piece:
-
+	-algo recursif (backtracking)
+		-etage par etage (Il faut connaitre la taille totale)
+		-on fait une boucle : sur l'etage (le ieme elemnt)
+			-on place tout les element qui reste sur l'element de l'etage
+			-et le reste dans l'ordre croissant
+			-on fait le swap que si il n'y a pas eu une piece du meme type
+SWAP DE 2 TETIMINOS (id a, id b):
+	-touver les adresse des piece aux id a && b
+	-changer: le next du prev && le prev du next
+	-

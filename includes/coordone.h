@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_test.c                                        :+:      :+:    :+:   */
+/*   coordone.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/27 08:49:44 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/27 08:53:22 by fjanoty          ###   ########.fr       */
+/*   Created: 2016/01/27 07:10:04 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/01/27 08:21:03 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef COORDONE_H
+# define COORDONE_H
 
-int	main(void)
+# include <stdlib.h>
+
+typedef	struct	s_coordone
 {
-	ft_putstr("SA MARCHE\n");
-	return (0);
-}
+	int			x;
+	int			y;
+}				t_coordone;
+t_coordone		*create_coordone(void);
+
+#endif
