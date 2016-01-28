@@ -28,33 +28,35 @@ static t_tetriminos 	*ft_followrightrabbit(t_tetriminos *rabbit, short *i, int *
 	return (rabbit);
 }
 
-t_tetriminos			*ft_tetriorder(t_tetriminos *begin, t_tetriminos *turtle,
-		int len, int stage)
+t_tetriminos			*ft_tetriorder(t_tetriminos *turtle, int len, int stage)
 {
 	short			i;
 	int				readymade;
 	t_tetriminos	*rabbit;
+	t_tetriminos	*test;
 
-	if (stage == len)
-	{
-		print_all_tetris(ft_findbegin(begin));
-		return (begin);
-	}
+	if (stage == len && ft_pushtetriminos(turtle))
+		return (ft_findbegin(turtle));
+	else if (stage == len)
+		return (NULL)
 	i = 1;
 	readymade = 0;
 	while (i <= len - stage)
 	{
-		begin = ft_tetriorder(begin, turtle->next, len, stage + 1);
+		test = ft_tetriorder(turtle->next, len, stage + 1);
+		if (test)
+			return (test);
 		rabbit = ft_followrightrabbit(turtle, &i, &readymade);
 		ft_tetriswap(turtle, rabbit);
 		if (rabbit)
 			turtle = rabbit;
 		i++;
 	}
-	if (rabbit)
-		begin = ft_tetriorder(begin, turtle->next, len, stage + 1);
-	ft_reorder(turtle);
-	return (ft_findbegin(begin));
+	if (rabbit && !test)
+		test = ft_tetriorder(turtle->next, len, stage + 1);
+	if (!test)
+		ft_reorder(turtle);
+	return (test);
 }
 /*
    0123
