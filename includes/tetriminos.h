@@ -25,6 +25,7 @@ struct				s_tetriminos
 	unsigned long	valu;
 	char			id;
 	int				type;
+	int				gap;
 	t_coordone		*dim;
 	t_coordone		*pos;
 };

@@ -29,7 +29,7 @@ t_tetriminos	*get_next_piece(int fd, int id)
 	if ((oct_lu = read(fd, str, 20)) != 20 && error(SET) && my_free(tetris) + 1)
 		return(NULL);
 	oct_lu = 0;
-	search_the_diese(str, tetris, &oct_lu, first_case(str));
+	search_the_diese(str, tetris, &oct_lu, (tetris->gap = first_case(str)));
 	if ((tetris->id == 0 || oct_lu != 4 || style_alive(str)) 
 	&& error(SET) && my_free(tetris))
 		return (NULL);

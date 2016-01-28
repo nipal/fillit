@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   ft_put.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
+/*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/27 08:17:12 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/27 09:08:54 by fjanoty          ###   ########.fr       */
+/*   Created: 2015/11/04 18:24:51 by fjanoty           #+#    #+#             */
+/*   Updated: 2015/11/05 00:11:36 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef FT_PUT_H
+# define FT_PUT_H
 
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include "structure.h"
-# include "ft_put.h"
+# include <unistd.h>
 
+int		ft_strlen(const char *str);
+void	ft_putchar(char c);
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr(char const *s);
+void	ft_putstr_fd(char const *s, int fd);
 #endif
