@@ -35,7 +35,7 @@ t_tetriminos			*ft_tetriorder(t_tetriminos *turtle, int len, int stage)
 	t_tetriminos	*rabbit;
 	t_tetriminos	*test;
 
-	if (stage == len && ft_pushtetriminos(turtle))
+	if (stage == len && ft_push_tetriminos(turtle))
 		return (ft_findbegin(turtle));
 	else if (stage == len)
 		return (NULL)
