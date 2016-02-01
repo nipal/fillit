@@ -66,6 +66,41 @@ unsigned	long	ft_working_window(t_sqare *gr, t_coordone *pos
 	return (ecr);
 }
 
+int		glb_nb_windows(int mode, int sqr_dim)
+{
+	static	int	nb_windows = 1;
+
+	if (mode & GET)
+		return (nb_windows);
+	else if (mode & SET)
+	{
+		nb_windows = (sqr_dim <= 12) ? 2 : 3;
+		nb_windows = (sqr_dim <= 8) ? 1 : nb_windows;
+		return (nb_windows);
+	}
+	else
+		return (1);
+}
+
+int		glb_sqr_dim(int mode, int value)
+{
+	static	int	sqr_dim = 1;
+	t_sqare		*ground;
+
+	if (mode & GET)
+		return (sqr_dim);
+	else if (mode & SET)
+	{
+		ground = glb_ground(GET, 0);
+		ground->dim = value;
+		glb_nb_windows(SET, value);
+		sqr_dim = value;
+		return (sqr_dim);
+	}
+	else
+		return (1);
+}
+
 t_sqare	*glb_ground(int mode, t_sqare *value)
 {
 	static	t_sqare	ground;
@@ -73,12 +108,16 @@ t_sqare	*glb_ground(int mode, t_sqare *value)
 	if (mode & GET)
 		return (ground);
 	else if (mode & SET)
-		return (ground = value);
+	{
+		ground = value;
+		glb_sqr_dim(SET, ground->dim);
+		return (ground);
+	}
 	else
 		return (NULL);
 }
 
-unsigned	long	*ft_init_windows(t_coordone *pos)
+unsigned	long	*ft_init_windows(t_coordone *pos, int stage)
 {
 	int					i;
 	unsigned	long	windows[3];
@@ -86,9 +125,8 @@ unsigned	long	*ft_init_windows(t_coordone *pos)
 	int					nb_win;
 
 	ground = glb_ground(GET, 0);
-	nb_win = (ground->dim <= 12) ? 2 : 3;
-	nb_win = (ground->dim <= 8) ? 1 : nb_win;
-	pos = create_coordone(pos->y);
+	nb_win = glb_nb_windows(GET, 0);
+	pos = create_coordone_y(stage * 4);
 	i = 0;
 	while (i < nb_win)
 	{
@@ -97,27 +135,48 @@ unsigned	long	*ft_init_windows(t_coordone *pos)
 		i++;
 	}
 	free(pos);
+	return (wimdows);
 }
 
-int	ft_push_tetriminos(t_tetriminos elem)
+int		ft_resting_posx(t_tetriminos *elem, int i)
 {
-	t_coordone			pos;
+	elem->valu >>= (8 - elem->dim->x);
+	elem->pos->x = 0;
+	return (i);
+}
+
+int		ft_resting_posy(t_tetriminos *elem, int j)
+{
+	elem->valu >>= ((8 - elem->dim->y) * 8);
+	elem->pos->y = 0;
+	return (j);
+}
+
+int	ft_push_tetriminos(t_tetriminos *elem)
+{
+	t_coordone			indice;
 	unsigned	long	wimdows[3];
-	int					i;
+	int					nb_windows;
 
 	i = 0;
 	pos = create_coordone();
-	windows = ft_init_windows(pos);
-	while (pos->x < 8 - elem->dim->x)
+	indice = create_coordone();
+	nb_windows = glb_nb_windows(GET, 0);
+
+	windows = ft_init_windows(0, indice->y);
+	while(indice->x <  )
 	{
-		if (elem->value & windows[i] == 0)
+		while (elem->pos->x < 8 - elem->dim->x)
 		{
-			// on actualise le ground
-			free(pos);
-			return (1);
+			if (elem->value & windows[i] == 0)
+			{
+				// on actualise le ground
+				free(indice);
+				return (1);
+			}
+			elem->valu <<= 1;
+			(pos->x)++;
 		}
-		elem->valu <<= 1;
-		(pos->x)++;
 	}
 	free(pos);
 	return (0);
@@ -131,6 +190,44 @@ nb ecr:
 	1 si dim <= 8
 	2 si dim <= 12
 	3 si dim <= 16
+-on check sur la largeur
+	-on peu switcher d'ecran
+	-et revenir a la ligne (recalage de la piece)
+-qund on a fini la hauteur des ecran on en regenere 3 autre
+	-on reclae la piece tut comme il faut
+	et on recomence
+quand on a tout fini et que c'est nun on renvoir (0)
+
+j < nb_ecr
+{
+	y < 8 - dim->y
+	{
+		i < nb_ecr
+		{
+			x < 8 - dim->x
+			{
+				x++
+			}
+			raz->x(ecr) && i++
+		}
+		y++
+	}
+	get_window();
+	raz->y(ecr) && j++
+}
+
+(i,j) -> indice
+(x,y) -> pos
+
+CONVERSION (x(ecr) + i) => x(ground)
+	- ground->x - (4 * indice->x) = ecr->x
+	- ecr->x + (4 * indice->x) = ground->x
+CONVERSION (y(ecr) + j) => y(ground)
+	- ground->y - (4 * indice->y) = ecr->y
+	- ecr->y + (4 * indice->y) = ground->y
+
++++++++++++++++++++++++++++++++
+ou commencer sur un nouvelle ecran
 
 	-on les renouvelle quand on a fini
 largeur de travaille = 8 - largeur de la piece

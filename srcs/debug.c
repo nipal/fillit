@@ -18,6 +18,7 @@ void	print_tetris(t_tetriminos *piece)
 	int					j;
 	unsigned	long	unite;
 
+	printf("\n");
 	unite = 1;
 	j = 0;
 	while (j < 4)
@@ -34,7 +35,6 @@ void	print_tetris(t_tetriminos *piece)
 		printf("\n");
 		j++;
 	}
-	printf("\n");
 }
 
 void	print_coordone(t_coordone *pos, char *name)

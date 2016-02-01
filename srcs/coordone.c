@@ -22,3 +22,14 @@ t_coordone		*create_coordone(void)
 	position->y = 0;
 	return (position);
 }
+
+t_coordone		*create_coordone_y(int y)
+{
+	t_coordone	*position;
+
+	if (!(position = (t_coordone*) malloc(sizeof(t_coordone))))
+		return (NULL);
+	position->x = 0;
+	position->y = y;
+	return (position);
+}

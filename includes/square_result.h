@@ -13,6 +13,11 @@
 #ifndef SQUARE_RESULT_H
 # define SQUARE_RESULT_H
 
+# define GET 1
+# define SET 2
+# define NB_WINDOWS 4
+
+
 typedef	struct			s_square
 {
 	unsigned	long	**area;
@@ -44,3 +49,10 @@ typedef	struct			s_square
 //		-garder en memoir tout les masque possible
 //		-n'utiliser que des masque verticale (cas particulier?)
 //		-garder en memoir 2 ou 3 ecran ded travaille pour les fin de ligne
+
+//	eran:
+//	on va fionalement utiliser des eccran superposer:
+//	la taille maximum c'est 
+
+
+
