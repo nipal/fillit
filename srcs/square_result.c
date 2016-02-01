@@ -37,6 +37,32 @@ t_sqare	*ft_create_square()
 	return (ground);
 }
 
+unsigned	long	get_vertical_mask(int size)
+{
+	static	unsigned	long	masks[8];
+	static	int					init = 1;
+	unsigned	long			vertical;
+	int							i;
+	int							j;
+
+	if (init)
+	{
+		init = 0;
+		vertical = VERTICAL;
+		j = 0;
+		while (j < 8)
+		{
+			i = 0;
+			while (i <= j)
+			{
+				masks[] |= vertical << i;
+				i++;
+			}
+			j++;
+		} 
+	}
+}
+
 unsigned	long	ft_working_window(t_sqare *gr, t_coordone *pos
 					, unsigned long horizontal, unsigned long vertical)
 {
@@ -44,6 +70,7 @@ unsigned	long	ft_working_window(t_sqare *gr, t_coordone *pos
 	unsigned	long	mv;
 	unsigned	long	ecr;
 	int					i;
+
 
 	mh = 0;
 	mv = 0;
@@ -152,6 +179,50 @@ int		ft_resting_posy(t_tetriminos *elem, int j)
 	return (j);
 }
 
+
+void	ft_set_tetris(t_tetriminos *elem, t_coordone *scr_pos)
+{
+	unsigned	long	window;
+	t_coordone			*indice;
+	t_sqare				*ground;
+
+	indice = create_coordone();
+	ground = glb_ground(GET, 0);
+	while (indice->y < 2)
+	{
+		while (indice->x < 2)
+		{
+			(indice->x)++;
+		}
+		(indice->y)++;
+	}
+	//	Il faut actualiser la piece sur les quatre quadrant
+	//	pour l'ajouter un fera un OU logique 
+	// l'indice nous indique sur quel ecran le piece a ete valider
+	// 0 et 2 ==>  aucun probleme
+	// pour un il fau decoupe la piece en deux la decaler et faire plein de truc rigolo
+	// on actualis la vrai position de la piece
+}
+
+   .
+00 | 10
+<- # ->
+01 | 11
+   .
+
+/*
+	avec scr_pos on identifi sur quel region on est
+		-->	case facile 		=====>	on update directement la region en question
+		-->	entre 2 (v ou h)	=====>	on decoupe 
+*/
+
+void	ft_rm_tetriminos(t_tetriminos *elem)
+{
+	//	on deduis, a partir de la position, les ecran sur les quelle la piece enpiete
+	//	on place des 0 au bon endroit avec  un OU EXCLUSIF
+	//	on reset la position de la piece
+}
+
 int	ft_push_tetriminos(t_tetriminos *elem)
 {
 	t_coordone			indice;
@@ -164,19 +235,29 @@ int	ft_push_tetriminos(t_tetriminos *elem)
 	nb_windows = glb_nb_windows(GET, 0);
 
 	windows = ft_init_windows(0, indice->y);
-	while(indice->x <  )
+	while (indice->y < nb_windows)
 	{
-		while (elem->pos->x < 8 - elem->dim->x)
+		while ((elem->pos->y < 8 - elem->dim->y) && elem->pox->y + (4 * nb_windows) < glb_sqr_dim(GET, 0) - elem->dim->y)
 		{
-			if (elem->value & windows[i] == 0)
+			while(indice->x < nb_windows)
 			{
-				// on actualise le ground
-				free(indice);
-				return (1);
+				while ((elem->pos->x < 8 - elem->dim->x) && elem->pox->x + (4 * nb_windows) < glb_sqr_dim(GET, 0) - elem->dim->x)
+				{
+					if (elem->value & windows[i] == 0)
+					{
+						ft_set_tetris(elem, indice);
+						free(indice);
+						return (1);
+					}
+					elem->valu <<= 1;
+					(elem->pos->x)++;
+				}
+				ft_resting_posx(elem, (indice->x)++);
 			}
-			elem->valu <<= 1;
-			(pos->x)++;
+			elem->valu <<= 8;
+			(elem->pos->y)++;
 		}
+		ft_resting_posy(elem, (indice->y)++);
 	}
 	free(pos);
 	return (0);
