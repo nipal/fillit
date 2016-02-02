@@ -28,3 +28,8 @@ fillit_structure(fd)
                     -> check type et set tetritype sur le mm que le correspondant ou max << 1
             -> get_next_piece return tetris
         -> tetris_push_front 
+
+
+:::::	Lapin	:::
+
+Ca serrait marrant de faireun makefile qui compile le projet a differente etape
