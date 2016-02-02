@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 06:46:52 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/27 09:29:41 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/02 16:55:24 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void	print_coordone(t_coordone *pos, char *name)
 void	describe_tetris(t_tetriminos *tetris)
 {
 	print_tetris(tetris);
+	printf("valu		:%ld\n", (long) tetris->valu);
+	printf("id		:%c\n", tetris->id);
+	printf("type		:%d\n", tetris->type);
 	printf("gap		:%d\n", tetris->gap);
-//	printf("valu	:%ld\n", (long) tetris->valu);
-//	printf("id		:%c\n", tetris->id);
-//	printf("type	:%d\n", tetris->type);
-//	print_coordone(tetris->dim, "	dim");
-//	print_coordone(tetris->pos, "	pos");
+	print_coordone(tetris->dim, "	dim");
+	print_coordone(tetris->pos, "	pos");
 }
 
 void	print_all_tetris(t_tetriminos *tetris)
