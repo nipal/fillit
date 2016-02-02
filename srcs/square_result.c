@@ -6,9 +6,12 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:23:53 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/27 07:36:32 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/03 00:49:55 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#define HORIZONTAL 255
+#define VERTICAL 72340172838076673
 
 t_sqare	*ft_create_square()
 {
@@ -39,7 +42,7 @@ t_sqare	*ft_create_square()
 
 unsigned	long	get_vertical_mask(int size)
 {
-	static	unsigned	long	masks[8];
+	static	unsigned	long	masks[9];
 	static	int					init = 1;
 	unsigned	long			vertical;
 	int							i;
@@ -50,17 +53,47 @@ unsigned	long	get_vertical_mask(int size)
 		init = 0;
 		vertical = VERTICAL;
 		j = 0;
-		while (j < 8)
+		while (j < 9)
 		{
 			i = 0;
-			while (i <= j)
+			masks[j] = 0;
+			while (i < j)
 			{
-				masks[] |= vertical << i;
+				masks[j] |= vertical << i;
 				i++;
 			}
 			j++;
 		} 
 	}
+	return (masks[size]);
+}
+
+unsigned	long	get_horizontal_mask(int size)
+{
+	static	unsigned	long	masks[9];
+	static	int					init = 1;
+	unsigned	long			horizontal;
+	int							i;
+	int							j;
+
+	if (init)
+	{
+		init = 0;
+		horizontal = HORIZONTAL;
+		j = 0;
+		while (j < 9)
+		{
+			i = 0;
+			masks[j] = 0;
+			while (i < j)
+			{
+				masks[j] |= horizontal << (i * 8);
+				i++;
+			}
+			j++;
+		} 
+	}
+	return (masks[size]);
 }
 
 unsigned	long	ft_working_window(t_sqare *gr, t_coordone *pos
@@ -69,23 +102,9 @@ unsigned	long	ft_working_window(t_sqare *gr, t_coordone *pos
 	unsigned	long	mh;
 	unsigned	long	mv;
 	unsigned	long	ecr;
-	int					i;
 
-
-	mh = 0;
-	mv = 0;
-	i = 0;
-	while (i < pos->x)
-	{
-		mv |= vertical << i;
-		i++;
-	}
-	i = 0;
-	while (i < pos->y)
-	{
-		mh |= horizontal << (i * 8);
-		i++;
-	}
+	mh = get_horizontal_mask(pos->x);
+	mv = get_horizontal_mask(pos->y);
 	ecr = ((gr->area[0][0] & ~mv & ~mh) >> (pos->x + (8 * pos->y)));
 	ecr |= (((gr->area[0][1] & ~mv & mh) >> pos->x) << (8 * (8 - pos->y)));
 	ecr |= (((gr->area[1][0] & mv & ~mh) << (8 - pos->x)) >> (8 * (pos->y)));
@@ -180,40 +199,131 @@ int		ft_resting_posy(t_tetriminos *elem, int j)
 }
 
 
-void	ft_set_tetris(t_tetriminos *elem, t_coordone *scr_pos)
+void	ft_set_tetris(t_tetriminos *elem, t_coordone *pos)
 {
-	unsigned	long	window;
-	t_coordone			*indice;
-	t_sqare				*ground;
+	unsigned	long	mh;
+	unsigned	long	mv;
+	t_sqare				*gr;
 
-	indice = create_coordone();
-	ground = glb_ground(GET, 0);
-	while (indice->y < 2)
+	gr = glb_ground(GET, 0);
+	pos->x *= 4;
+	pos->y *= 4;
+	mv = get_vertical_mask(pos->x);
+	mh = get_horizontal_mask(pos->y);
+	gr->area[0][0] |= (elem->value & ~mh & ~mv) >> (pos->x + (8 * pos->y));
+	gr->area[0][1] |= ((elem->value & ~mh & mv) >> pos->x) << (8 * (8 - pos->y));
+	gr->area[1][0] |= ((elem->value & mh & ~mv) << (8 - pos->x)) >> (8 * pos->y);
+	gr->area[1][1] |= (elem->value & mh & mv) << (8 - pos->x + (8 * (8 - pos->y)));
+}
+
+
+void	ft_remouve_tetris(t_tetriminos *elem)
+{
+	unsigned	long	mh;
+	unsigned	long	mv;
+	t_coordone			*pos;
+	t_sqare				*gr;
+
+	pos = create_coordone();
+
+	gr = glb_ground(GET, 0);
+	pos->x = (elem->pos->x / 4) * 4;
+	pos->y = (elem->pos->y / 4) * 4;
+	mv = get_vertical_mask(pos->x);
+	mh = get_horizontal_mask(pos->y);
+	gr->area[0][0] &= ~((elem->value & ~mh & ~mv) >> (pos->x + (8 * pos->y)));
+	gr->area[0][1] &= ~(((elem->value & ~mh & mv) >> pos->x) << (8 * (8 - pos->y)));
+	gr->area[1][0] &= ~(((elem->value & mh & ~mv) << (8 - pos->x)) >> (8 * pos->y));
+	gr->area[1][1] &= ~((elem->value & mh & mv) << (8 - pos->x + (8 * (8 - pos->y))));
+	free(pos);
+}
+
+
+//ft_tetrilen(t_tetriminos);
+
+char	*ft_init_str_result()
+{
+	char	*reslut;
+	int		len;
+	int		i;
+
+	len = glb_sqr_dim(GET, 0);
+	len = len * (len + 1);
+	if (!(result = (char*)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	resut[len] = '\0';
+}
+
+int	indice_input(t_coordone *pos, t_coordone *ind, int len)
+{
+	return ((indice->x + pos->x) + ((indice->y + pos->y) * len + 1));
+}
+
+char	*ft_get_result(t_coordone *pos, t_coordone *indice, t_tetriminos *elem, int len)
+{
+	static	char		*result = 0;
+	static	int			init = 1;
+	unsigned	double	unite;
+
+	if (init)
+		result = ft_init_str_result();
+	unite = 1;
+	while (indice->y < 4)
 	{
-		while (indice->x < 2)
+		indice->x = 0;
+		while (indice->x < 4)
 		{
+			if (elem->valu & unite << (indice->x + (8 * indice->y)))
+				result[indice_input(pos, indice, len)] = elem->id;
 			(indice->x)++;
 		}
 		(indice->y)++;
 	}
-	//	Il faut actualiser la piece sur les quatre quadrant
-	//	pour l'ajouter un fera un OU logique 
-	// l'indice nous indique sur quel ecran le piece a ete valider
-	// 0 et 2 ==>  aucun probleme
-	// pour un il fau decoupe la piece en deux la decaler et faire plein de truc rigolo
-	// on actualis la vrai position de la piece
+	return (result);
 }
 
+void	ft_print_resut(t_tetriminos *begin)
+{
+	t_coordone			*pos;
+	t_coordone			*indice;
+	int					len;
+
+	pos = create_coordone();
+	indice = create_coordone();
+	len= glb_sqr_dim(GET, 0);
+	while (begin)
+	{
+		copy_coordone(pos, begin->pos);
+		ft_resting_posx(begin, 0);
+		ft_resting_posx(begin, 0);
+		result = ft_get_result(pos, indice, begin, len);
+		begin = begin->next;
+	}
+	ft_putsrt(result);
+	free(pos);
+	free(pos);
+}
+/*	IMPRIMER LES PIECE:
+ *		-on sauvgard la position
+ *		-on decale la piece en haut a gauche
+ *		-on fait une boucle sur un carer de 4*4
+ *			-on incremente a la bose position chaque piece;
+ *
+ * */
+
+
+/*
    .
 00 | 10
 <- # ->
 01 | 11
    .
+*/
 
 /*
-	avec scr_pos on identifi sur quel region on est
-		-->	case facile 		=====>	on update directement la region en question
-		-->	entre 2 (v ou h)	=====>	on decoupe 
+ *	mask_v = get_vertical_mask(scr_pos->x * 4);
+ *
+ *
 */
 
 void	ft_rm_tetriminos(t_tetriminos *elem)
@@ -262,6 +372,14 @@ int	ft_push_tetriminos(t_tetriminos *elem)
 	free(pos);
 	return (0);
 }
+/*	ENLEVER UNE PIECE
+ *
+ *	c'est comme si on veux l'ajouter
+ *	sauf que on veux ecrire des 0 au lieu d'ecrire des 1
+ *
+ *
+ *
+ * */
 
 /*
 AJOIUTER UNE PIECE
