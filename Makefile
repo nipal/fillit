@@ -19,15 +19,15 @@ S =		coordone.c\
 		fillit_structure.c\
 		main.c\
 		tetriminos.c\
-		ft_put.c\
 		debug.c
+#		ft_put.c
 #		generate_order.c\
 
 SRC = $(addprefix srcs/,$(S))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	gcc $(FLAGS) $(SRC) -I includes -o $(NAME)
+	gcc $(FLAGS) $(SRC) -I includes libft.a -o $(NAME)
 
 clean:
 	rm -f nothing

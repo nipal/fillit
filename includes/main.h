@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 08:17:12 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/27 09:08:54 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/02 16:42:24 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include "structure.h"
-# include "ft_put.h"
+# include "libft.h"
 
 #endif
