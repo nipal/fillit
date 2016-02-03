@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:23:53 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/27 07:36:32 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/02 22:07:38 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,10 @@ t_coordone		*create_coordone_y(int y)
 	position->x = 0;
 	position->y = y;
 	return (position);
+}
+
+void		copy_coordone(t_coordone *pos_dst, t_coordone *pos_src)
+{
+	pos_dst->x = pos_src->x;
+	pos_dst->y = pos_src->y;
 }

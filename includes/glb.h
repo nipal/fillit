@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tetrilen.c                                      :+:      :+:    :+:   */
+/*   glb.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tboos <marvin@42.fr> 	                    +#+  +:+       +#+        */
+/*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/02 21:44:00 by tboos             #+#    #+#             */
-/*   Updated: 2016/02/02 21:44:58 by fjanoty          ###   ########.fr       */
+/*   Created: 2016/02/03 21:53:00 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/02/03 22:10:30 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "header.h"
+#ifndef GLB_H
+# define GLB_H
+# define GET 1
+# define SET 2
 
-int				ft_tetrilen(t_tetriminos *begin)
-{
-	short				i;
+#include "sqare_result.h"
 
-	i = 0;
-	while (begin)
-	{
-		begin = begin->next;
-		i++;
-	}
-	return (i - 1);
-}
+int			glb_nb_windows(int mode, int sqr_dim);
+int			glb_sqr_dim(int mode, int value);
+t_sqare		*glb_ground(int mode, t_sqare *value);
+
+
+#endif
