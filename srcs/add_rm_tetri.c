@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:11:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/03 22:17:31 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/04 20:01:00 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,83 @@ unsigned	long	ft_working_window(t_sqare *gr, t_coordone *pos
 
 
 unsigned	long	*ft_init_windows(t_coordone *pos, int stage)
+int	ft_push_tetriminos(t_tetriminos *elem)
 {
+	t_coordone			indice;
+	unsigned	long	wimdows[3];
+	int					nb_windows;
+
+	i = 0;
+	pos = create_coordone();
+	indice = create_coordone();
+	nb_windows = glb_nb_windows(GET, 0);
+
+	windows = ft_init_windows(0, indice->y);
+	while (indice->y < nb_windows)
+	{
+		while ((elem->pos->y < 8 - elem->dim->y) && elem->pox->y + (4 * nb_windows) < glb_sqr_dim(GET, 0) - elem->dim->y)
+		{
+			while(indice->x < nb_windows)
+			{
+				while ((elem->pos->x < 8 - elem->dim->x) && elem->pox->x + (4 * nb_windows) < glb_sqr_dim(GET, 0) - elem->dim->x)
+				{
+					if (elem->value & windows[i] == 0)
+					{
+						ft_set_tetris(elem, indice);
+						free(indice);
+						return (1);
+					}
+					elem->valu <<= 1;
+					(elem->pos->x)++;
+				}
+				ft_resting_posx(elem, (indice->x)++);
+			}
+			elem->valu <<= 8;
+			(elem->pos->y)++;
+		}
+		ft_resting_posy(elem, (indice->y)++);
+	}
+	free(pos);
+	return (0);
+}int	ft_push_tetriminos(t_tetriminos *elem)
+{
+	t_coordone			indice;
+	unsigned	long	wimdows[3];
+	int					nb_windows;
+
+	i = 0;
+	pos = create_coordone();
+	indice = create_coordone();
+	nb_windows = glb_nb_windows(GET, 0);
+
+	windows = ft_init_windows(0, indice->y);
+	while (indice->y < nb_windows)
+	{
+		while ((elem->pos->y < 8 - elem->dim->y) && elem->pox->y + (4 * nb_windows) < glb_sqr_dim(GET, 0) - elem->dim->y)
+		{
+			while(indice->x < nb_windows)
+			{
+				while ((elem->pos->x < 8 - elem->dim->x) && elem->pox->x + (4 * nb_windows) < glb_sqr_dim(GET, 0) - elem->dim->x)
+				{
+					if (elem->value & windows[i] == 0)
+					{
+						ft_set_tetris(elem, indice);
+						free(indice);
+						return (1);
+					}
+					elem->valu <<= 1;
+					(elem->pos->x)++;
+				}
+				ft_resting_posx(elem, (indice->x)++);
+			}
+			elem->valu <<= 8;
+			(elem->pos->y)++;
+		}
+		ft_resting_posy(elem, (indice->y)++);
+	}
+	free(pos);
+	return (0);
+}{
 	int					i;
 	unsigned	long	windows[3];
 	t_sqare				*ground;
