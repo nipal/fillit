@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:23:53 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/27 06:57:47 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/04 20:10:25 by tboos            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int			fillit_structure(int fd)
 	t_tetriminos	*first_tetris;
 	error(INIT);
 	first_tetris = get_the_pieces(fd);
-	if (!first_tetris || error(GET))
+	if (!first_tetris)  //suppression error get deja fait juste avant
 		return (-1);
 	print_all_tetris(first_tetris);
 	return (0);
