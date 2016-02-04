@@ -6,7 +6,7 @@
 /*   By: tboos <toussaint.boos@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 18:15:02 by tboos             #+#    #+#             */
-/*   Updated: 2016/02/04 20:19:21 by tboos            ###   ########.fr       */
+/*   Updated: 2016/02/05 00:08:13 by tboos            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_reorder(t_tetriminos *rabbit)
 	t_tetriminos	*stick;
 	t_tetriminos	*turtle;
 
+	if (rabbit->prev)
+		ft_remouve_tetris(rabbit->prev)
 	stick = rabbit;
 	while (stick->next)
 	{
