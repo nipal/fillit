@@ -6,14 +6,14 @@
 /*   By: tboos <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 18:14:15 by tboos             #+#    #+#             */
-/*   Updated: 2016/02/04 21:30:20 by tboos            ###   ########.fr       */
+/*   Updated: 2016/02/05 00:19:58 by tboos            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "header.h"
 #include <stdio.h>
 
-t_tetriminos			*ft_findbegin(t_tetriminos *begin)
+static t_tetriminos			*ft_findbegin(t_tetriminos *begin)
 {
 	while (begin->prev)
 		begin = begin->prev;
@@ -49,23 +49,21 @@ t_tetriminos			*ft_tetriorder(t_tetriminos *turtle, int len, int stage)
 
 	if (stage == len && ft_push_tetriminos(turtle))
 		return (ft_findbegin(turtle));
-	else if (stage == len)
+	else if (stage == len && ft_reorder(turtle))
 		return (NULL)
-	i = 1;
+	i = 0;
 	readymade = 0;
-	while (i <= len - stage)
+	while (++i <= len - stage)
 	{
-		test = ft_tetriorder(turtle->next, len, stage + 1);
-		if (test)
+		if ((test = ft_tetriorder(turtle->next, len, stage + 1)))
 			return (test);
 		rabbit = ft_followrightrabbit(turtle, &i, &readymade);
 		ft_tetriswap(turtle, rabbit);
 		if (rabbit)
 			turtle = rabbit;
-		i++;
 	}
-	if (rabbit && !test)
-		test = ft_tetriorder(turtle->next, len, stage + 1);
+	if (rabbit)
+		test = ft_tetriorder(turtle->next, len, stage + 1);			
 	if (!test)
 		ft_reorder(turtle);
 	return (test);
@@ -73,9 +71,10 @@ t_tetriminos			*ft_tetriorder(t_tetriminos *turtle, int len, int stage)
 
 t_tetriminos			*ft_squ_lunch(t_tetriminos *begin, int len)
 {
-	int	i;
-	int	j;
-	int	sq;
+	int				i;
+	int				j;
+	int				sq;
+	t_sqare			ground;
 
 	i = (len + 1) * 4;
 	j = 1;
@@ -85,7 +84,8 @@ t_tetriminos			*ft_squ_lunch(t_tetriminos *begin, int len)
 		j += 2;
 		sq++;
 	}
-	
+	while (
+		glb_sqr_dim(SET, sq);
 }
 /*
    0123
