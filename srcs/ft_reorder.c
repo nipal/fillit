@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_reorder.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tboos <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: tboos <toussaint.boos@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 18:15:02 by tboos             #+#    #+#             */
-/*   Updated: 2016/02/03 18:15:32 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/04 20:19:21 by tboos            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-# include "header.h"
+#include "header.h"
 
 void	ft_reorder(t_tetriminos *rabbit)
 {
@@ -20,7 +19,7 @@ void	ft_reorder(t_tetriminos *rabbit)
 
 	stick = rabbit;
 	while (stick->next)
-	{	
+	{
 		rabbit = stick->next;
 		turtle = stick;
 		while (rabbit)

@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 07:38:47 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/27 07:44:31 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/04 20:21:28 by tboos            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ void			search_the_diese(char *piece, t_tetriminos *tetris
 	if (piece[i] == '#')
 	{
 		piece[i] = '.';
-		tetris->valu += unite << (i % 5 + ((i / 5) * 8) );
+		tetris->valu += unite << (i % 5 + ((i / 5) * 8));
 		*nb += 1;
 		actual_mini_maxi(tetris, i);
 		if (i - 5 >= 0)
 			search_the_diese(piece, tetris, nb, i - 5);
-		if ((i - 1 ) % 5 != 4 && (i - 1) >= 0)
+		if ((i - 1) % 5 != 4 && (i - 1) >= 0)
 			search_the_diese(piece, tetris, nb, i - 1);
-		if ((i + 1 ) % 5 != 0 && (i + 1) % 5 != 4 && (i + 1) < 20)
+		if ((i + 1) % 5 != 0 && (i + 1) % 5 != 4 && (i + 1) < 20)
 			search_the_diese(piece, tetris, nb, i + 1);
 		if (i + 5 < 20)
 			search_the_diese(piece, tetris, nb, i + 5);
