@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 21:51:14 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/03 21:55:05 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/04 21:30:26 by tboos            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		glb_sqr_dim(int mode, int value)
 
 t_sqare	*glb_ground(int mode, t_sqare *value)
 {
-	static	t_sqare	ground;
+	static	t_sqare	*ground;
 
 	if (mode & GET)
 		return (ground);

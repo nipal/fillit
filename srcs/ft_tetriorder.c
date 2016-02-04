@@ -6,14 +6,14 @@
 /*   By: tboos <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 18:14:15 by tboos             #+#    #+#             */
-/*   Updated: 2016/02/03 18:14:51 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/04 21:30:20 by tboos            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "header.h"
 #include <stdio.h>
 
-t_tetriminos		*ft_findbegin(t_tetriminos *begin)
+t_tetriminos			*ft_findbegin(t_tetriminos *begin)
 {
 	while (begin->prev)
 		begin = begin->prev;
@@ -69,6 +69,23 @@ t_tetriminos			*ft_tetriorder(t_tetriminos *turtle, int len, int stage)
 	if (!test)
 		ft_reorder(turtle);
 	return (test);
+}
+
+t_tetriminos			*ft_squ_lunch(t_tetriminos *begin, int len)
+{
+	int	i;
+	int	j;
+	int	sq;
+
+	i = (len + 1) * 4;
+	j = 1;
+	while (i > 0)
+	{
+		i = i - j;
+		j += 2;
+		sq++;
+	}
+	
 }
 /*
    0123
