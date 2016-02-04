@@ -6,7 +6,7 @@
 /*   By: tboos <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 18:14:15 by tboos             #+#    #+#             */
-/*   Updated: 2016/02/05 00:19:58 by tboos            ###   ########.fr       */
+/*   Updated: 2016/02/05 00:33:38 by tboos            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,26 @@ t_tetriminos			*ft_squ_lunch(t_tetriminos *begin, int len)
 	int				j;
 	int				sq;
 	t_sqare			ground;
+	t_tetriminos	*result;
 
 	i = (len + 1) * 4;
 	j = 1;
+	sq = 0;
 	while (i > 0)
 	{
 		i = i - j;
 		j += 2;
 		sq++;
 	}
-	while (
+	result = NULL
+	while (sq < 16)
+	{
 		glb_sqr_dim(SET, sq);
+		if((result = ft_tetriorder(begin, len, 0)))
+			return (result);
+		sq++;
+	}
+	return (NULL);
 }
 /*
    0123
