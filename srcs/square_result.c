@@ -6,14 +6,14 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:23:53 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/04 23:07:40 by tboos            ###   ########.fr       */
+/*   Updated: 2016/02/04 23:09:00 by tboos            ###   ########.fr       */
 /*                                                                            */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "square_result.h"
 
-t_sqare	*ft_create_square()
+t_sqare	*ft_create_square(int dim)
 {
 	t_sqare	*ground;
 	int		i;
@@ -36,7 +36,7 @@ t_sqare	*ft_create_square()
 			ground->area[i][j] = 0;
 		i++;
 	}
-	ground->dim = 0;
+	ground->dim = dim;
 	return (ground);
 }
 
