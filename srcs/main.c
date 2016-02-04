@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/03 22:45:56 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/27 09:08:12 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/04 18:55:52 by tboos            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int		main(int ac, char **av)
 			ft_putstr_fd("error\n", 2);
 	}
 	else if (ac == 1)
-		ft_putstr_fd("usage: missing the input file\n", 2);
+		ft_putstr_fd("error\n", 2);
 	else
-		ft_putstr_fd("usage: too many arguments\n", 2);
+		ft_putstr_fd("error\n", 2);
 	return (0);
 }
