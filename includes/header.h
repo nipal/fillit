@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:23:53 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/05 03:54:11 by tboos            ###   ########.fr       */
+/*   Updated: 2016/02/05 04:17:20 by tboos            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 # include <stdlib.h>
 
-typedef	struct s_coordone	t_tetriminos;
+typedef struct s_tetriminos t_tetriminos;
 typedef	struct		s_coordone
 {
 	int				x;
 	int				y;
 }					t_coordone;
-struct				s_tetriminos
+typedef struct		s_tetriminos
 {
 	t_tetriminos	*next;
 	t_tetriminos	*prev;

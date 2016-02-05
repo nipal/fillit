@@ -6,13 +6,12 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:23:53 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/05 03:44:25 by tboos            ###   ########.fr       */
+/*   Updated: 2016/02/05 04:13:59 by tboos            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "header.h"
 #include "structure.h"
-#include "print.h"
-#include "square_result.h"
 
 static int		my_free(void *addr)
 {
@@ -66,14 +65,13 @@ t_tetriminos	*get_the_pieces(int fd)
 int				fillit_structure(int fd)
 {
 	t_tetriminos	*first_tetris;
-	t_sqare			*ground;
 
 	error(INIT);
 	first_tetris = get_the_pieces(fd);
 	if (!first_tetris)
 		return (-1);
 //	print_all_tetris(first_tetris);
-	ground = glb_ground(SET, ft_create_square());
+	glb_ground(SET, ft_create_square());
 	first_tetris = ft_squ_lunch(first_tetris, ft_tetrilen(first_tetris));
 	ft_print_result(first_tetris);
 	return (0);
