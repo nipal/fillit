@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 19:09:50 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/05 03:53:49 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/05 04:09:06 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define Y elem->pos->y
 # define X elem->pos->x
 # define DIM_X elem->dim->x
-# define DIM_Y elem->dim->Y
+# define DIM_Y elem->dim->y
 # define IND_Y indice->y
 # define IND_X indice->x
 
@@ -32,6 +32,6 @@ unsigned	long	ft_working_window(t_sqare *gr, t_coordone *pos
 					, unsigned long horizontal, unsigned long vertical);
 unsigned	long	*ft_init_windows(t_coordone *pos, int stage);
 void				ft_remouve_tetris(t_tetriminos *elem);
-void				ft_set_tetris(t_tetriminos *elem, t_coordone *pos);
+int					ft_set_tetris(t_tetriminos *elem, t_coordone *pos);
 int					ft_push_tetriminos(t_tetriminos *elem);
 #endif
