@@ -6,7 +6,7 @@
 /*   By: tboos <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 18:14:15 by tboos             #+#    #+#             */
-/*   Updated: 2016/02/05 00:33:38 by tboos            ###   ########.fr       */
+/*   Updated: 2016/02/05 06:17:06 by tboos            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ t_tetriminos			*ft_tetriorder(t_tetriminos *turtle, int len, int stage)
 
 	if (stage == len && ft_push_tetriminos(turtle))
 		return (ft_findbegin(turtle));
-	else if (stage == len && ft_reorder(turtle))
-		return (NULL)
+	else if (stage == len)
+		return (ft_reorder(turtle));
 	i = 0;
 	readymade = 0;
 	while (++i <= len - stage)
@@ -62,11 +62,9 @@ t_tetriminos			*ft_tetriorder(t_tetriminos *turtle, int len, int stage)
 		if (rabbit)
 			turtle = rabbit;
 	}
-	if (rabbit)
-		test = ft_tetriorder(turtle->next, len, stage + 1);			
-	if (!test)
-		ft_reorder(turtle);
-	return (test);
+	if (rabbit && (test = ft_tetriorder(turtle->next, len, stage + 1)))
+			return (test);
+	return (ft_reorder(turtle));
 }
 
 t_tetriminos			*ft_squ_lunch(t_tetriminos *begin, int len)
@@ -86,7 +84,6 @@ t_tetriminos			*ft_squ_lunch(t_tetriminos *begin, int len)
 		j += 2;
 		sq++;
 	}
-	result = NULL
 	while (sq < 16)
 	{
 		glb_sqr_dim(SET, sq);

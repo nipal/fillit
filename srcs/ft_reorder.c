@@ -6,13 +6,13 @@
 /*   By: tboos <toussaint.boos@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 18:15:02 by tboos             #+#    #+#             */
-/*   Updated: 2016/02/05 00:20:02 by tboos            ###   ########.fr       */
+/*   Updated: 2016/02/05 06:14:20 by tboos            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	ft_reorder(t_tetriminos *rabbit)
+t_tetriminos	*ft_reorder(t_tetriminos *rabbit)
 {
 	t_tetriminos	*stick;
 	t_tetriminos	*turtle;
@@ -20,28 +20,28 @@ void	ft_reorder(t_tetriminos *rabbit)
 	if (rabbit->prev)
 		ft_remouve_tetris(rabbit->prev);
 	stick = rabbit;
-	if (rabbit)
-		while (stick->next)
+	while (stick && stick->next)
+	{
+		rabbit = stick->next;
+		turtle = stick;
+		while (rabbit)
 		{
-			rabbit = stick->next;
-			turtle = stick;
-			while (rabbit)
-			{
-				if (rabbit->id < turtle->id)
-					turtle = rabbit;
-				rabbit = rabbit->next;
-			}
-			if (turtle != stick)
-			{
-				ft_tetriswap(turtle, stick);
-				stick = turtle->next;
-			}
-			else
-				stick = stick->next;
+			if (rabbit->id < turtle->id)
+				turtle = rabbit;
+			rabbit = rabbit->next;
 		}
+		if (turtle != stick)
+		{
+			ft_tetriswap(turtle, stick);
+			stick = turtle->next;
+		}
+		else
+			stick = stick->next;
+	}
+	return (NULL);
 }
 
-void	ft_tetriswap(t_tetriminos *r1, t_tetriminos *r2)
+void		ft_tetriswap(t_tetriminos *r1, t_tetriminos *r2)
 {
 	t_tetriminos	*s;
 
