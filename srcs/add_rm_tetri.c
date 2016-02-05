@@ -6,14 +6,13 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:11:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/05 04:15:47 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/05 06:21:07 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "add_rm_tetri.h"
 
-unsigned	long	ft_working_window(t_sqare *gr, t_coordone *pos
-					, unsigned long horizontal, unsigned long vertical)
+unsigned	long	ft_working_window(t_sqare *gr, t_coordone *pos)
 {
 	unsigned	long	mh;
 	unsigned	long	mv;
@@ -44,7 +43,7 @@ unsigned	long	*ft_init_windows(t_coordone *pos, int stage)
 	while (i < nb_win)
 	{
 		pos->x = (i * 4);
-		windows[i] = ft_working_window(ground, pos, HORIZONTAL, VERTICAL);
+		windows[i] = ft_working_window(ground, pos);
 		i++;
 	}
 	free(pos);

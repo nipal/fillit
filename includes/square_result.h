@@ -6,12 +6,14 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:23:53 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/04 21:15:38 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/05 06:18:55 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SQUARE_RESULT_H
 # define SQUARE_RESULT_H
+
+# include <stdlib.h>
 
 typedef	struct			s_square
 {
