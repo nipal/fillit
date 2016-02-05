@@ -6,7 +6,7 @@
 /*   By: tboos <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 18:14:15 by tboos             #+#    #+#             */
-/*   Updated: 2016/02/05 06:17:06 by tboos            ###   ########.fr       */
+/*   Updated: 2016/02/05 06:22:31 by tboos            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ t_tetriminos			*ft_squ_lunch(t_tetriminos *begin, int len)
 	int				i;
 	int				j;
 	int				sq;
-	t_sqare			ground;
 	t_tetriminos	*result;
 
 	i = (len + 1) * 4;
