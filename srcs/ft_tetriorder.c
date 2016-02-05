@@ -6,11 +6,12 @@
 /*   By: tboos <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 18:14:15 by tboos             #+#    #+#             */
-/*   Updated: 2016/02/05 10:54:40 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/05 21:12:42 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "header.h"
+#include "header.h"
+#include <stdio.h>
 
 static t_tetriminos			*ft_findbegin(t_tetriminos *begin)
 {
@@ -84,6 +85,7 @@ t_tetriminos			*ft_squ_lunch(t_tetriminos *begin, int len)
 	}
 	while (sq < 16)
 	{
+dprintf(1, "#### len:%d\n", sq);
 		glb_sqr_dim(SET, sq);
 		if((result = ft_tetriorder(begin, len, 0)))
 			return (result);

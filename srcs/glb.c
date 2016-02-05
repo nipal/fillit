@@ -6,11 +6,12 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 21:51:14 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/05 04:24:14 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/05 21:15:25 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "glb.h"
+#include <stdio.h>
 
 int		glb_nb_windows(int mode, int sqr_dim)
 {
@@ -37,6 +38,7 @@ int		glb_sqr_dim(int mode, int value)
 		return (sqr_dim);
 	else if (mode & SET)
 	{
+dprintf(1, "ON SETTTTTT :::%d\n", value);
 		ground = glb_ground(GET, 0);
 		ground->dim = value;
 		glb_nb_windows(SET, value);

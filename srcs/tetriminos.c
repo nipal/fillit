@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 06:06:49 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/27 06:19:26 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/05 21:07:51 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int	tetris_free(t_tetriminos *elem)
 void			finished_tetriminos(t_tetriminos *tetris)
 {
 	tetris->gap = (tetris->gap % 5) - tetris->pos->x; 
-	tetris->dim->x = tetris->dim->x - tetris->pos->x;
-	tetris->dim->y = tetris->dim->y - tetris->pos->y;
+	tetris->dim->x = tetris->dim->x - tetris->pos->x + 1;
+	tetris->dim->y = tetris->dim->y - tetris->pos->y + 1;
 	tetris->valu = tetris->valu >> (tetris->pos->x + (tetris->pos->y * 8));
 	tetris->pos->x = 0;
 	tetris->pos->y = 0;

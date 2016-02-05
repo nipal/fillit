@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:03:34 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/05 11:12:09 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/05 21:36:46 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_init_str_result()
 
 	len = glb_sqr_dim(GET, 0);
 	len = len * (len + 1);
-dprintf(1, "len:%d\n", len);
+dprintf(1, "len_char_result:%d\n", len);
 	if (!(result = (char*)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	result[len] = '\0';
@@ -39,10 +39,6 @@ char	*ft_get_result(t_coordone *pos, t_coordone *indice, t_tetriminos *elem, int
 	static	char		*result = 0;
 	static	int			init = 1;
 	unsigned	long	unite;
-static	int debug = 0;
-
-dprintf(1, "ft_get_resul:%d\n", ++debug);
-dprintf(1, "init:%d\n", init);
 
 	if (init && !(init = 0))
 		result = ft_init_str_result();
@@ -52,8 +48,13 @@ dprintf(1, "init:%d\n", init);
 		indice->x = 0;
 		while (indice->x < 4)
 		{
+dprintf(1, "val:%ld\n", elem->valu);
 			if (elem->valu & unite << (indice->x + (8 * indice->y)))
+{
+//dprintf(1, "x:%d y:%d\n", );
 				result[indice_input(pos, indice, len)] = elem->id;
+dprintf(1, "s:%s\n", result);
+}
 			(indice->x)++;
 		}
 		(indice->y)++;
@@ -67,16 +68,18 @@ void	ft_print_result(t_tetriminos *begin)
 	t_coordone			*indice;
 	int					len;
 	char	*result;
+int	debug = 0;
 
-print_all_tetris(begin);
+//print_all_tetris(begin);
 if(!begin)
 dprintf(1, "ON T'AS NICKER\n");
-dprintf(1, "len:%d\n", ft_tetrilen(begin));
+dprintf(1, "len_tetri:%d\n", ft_tetrilen(begin));
 	pos = create_coordone();
 	indice = create_coordone();
 	len= glb_sqr_dim(GET, 0);
 	while (begin)
 	{
+dprintf(1, "print_piece:%d\n", ++debug);
 		copy_coordone(pos, begin->pos);
 		ft_resting_posx(begin, 0);
 		ft_resting_posx(begin, 0);
