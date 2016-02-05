@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:23:53 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/27 18:18:29 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/05 03:54:11 by tboos            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ struct				s_tetriminos
 	t_coordone		*dim;
 	t_coordone		*pos;
 };
+t_sqare				*glb_ground(int mode, t_sqare *value);
+t_sqare				*ft_create_square(void);
 t_tetriminos		*ft_findbegin(t_tetriminos *begin);
 int					tetris_free(t_tetriminos *elem);
 int					ft_tetrilen(t_tetriminos *begin);
@@ -38,4 +40,6 @@ void				print_all_tetris(t_tetriminos *tetris);
 void				ft_tetriswap(t_tetriminos *r1, t_tetriminos *r2);
 void				ft_reorder(t_tetriminos *rabbit);
 t_tetriminos		*ft_tetriorder(t_tetriminos *turtle, int len, int stage);
+t_tetriminos		*ft_squ_lunch(t_tetriminos *begin, int len);
+void				ft_print_resut(t_tetriminos *begin);
 #endif
