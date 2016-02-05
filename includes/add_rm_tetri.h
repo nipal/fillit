@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 19:09:50 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/04 20:00:43 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/04 23:55:33 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # include "stdlib.h"
 # include "manip_bin.h"
 # include "glb.h"
+
+# define Y elem->pos->y
+# define X elem->pos->x
+# define DIM_X elem->dim->x
+# define DIM_Y elem->dim->Y
+# define IND_Y indice->y
+# define IND_X indice->x
 
 unsigned	long	ft_working_window(t_sqare *gr, t_coordone *pos
 					, unsigned long horizontal, unsigned long vertical);

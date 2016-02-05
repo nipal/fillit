@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:23:53 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/04 20:51:58 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/04 21:15:38 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char				*ft_init_str_result();
 char				*ft_get_result(t_coordone *pos, t_coordone *indice, t_tetriminos *elem, int len);//
 void				ft_print_resut(t_tetriminos *begin);
 
-	add_rm:		5
+	add_rm_tetri:		5
 unsigned	long	ft_working_window(t_sqare *gr, t_coordone *pos, unsigned long horizontal, unsigned long vertical);--->	oui
 unsigned	long	*ft_init_windows(t_coordone *pos, int stage);
 void				ft_remouve_tetris(t_tetriminos *elem);

@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   manip_bin.h                                        :+:      :+:    :+:   */
+/*   main_loop_seption.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/04 20:08:05 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/04 21:15:08 by fjanoty          ###   ########.fr       */
+/*   Created: 2016/02/05 00:20:38 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/02/05 00:31:30 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MANIP_BIN_H
-# define MANIP_BIN_H
+#include <stdio.h>
 
-# include "tetriminos.h"
-# define HORIZONTAL 255
-# define VERTICAL 72340172838076673
+int	main()
+{
+	int	i = 0;
+	int	j = 0;
 
-unsigned	long	get_vertical_mask(int size);
-unsigned	long	get_horizontal_mask(int size);
-int					ft_resting_posx(t_tetriminos *elem, int i);
-int					ft_resting_posy(t_tetriminos *elem, int j);
-#endif
+	if (j == 0)
+		while (++j < 10 && !(i = 0))
+		{
+			while (++i < 10)
+				if (i % 3 == 0)
+					printf("i:%d\n", i);
+		}
+	return (0);
+}

@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   manip_bin.h                                        :+:      :+:    :+:   */
+/*   main_test_define.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/04 20:08:05 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/04 21:15:08 by fjanoty          ###   ########.fr       */
+/*   Created: 2016/02/04 21:56:17 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/02/04 23:19:48 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MANIP_BIN_H
-# define MANIP_BIN_H
+#include <stdio.h>
+#define BLA_BLA "je suis un petit lapin\n"
+#define OPERATION 8 - 3 + 4
 
-# include "tetriminos.h"
-# define HORIZONTAL 255
-# define VERTICAL 72340172838076673
 
-unsigned	long	get_vertical_mask(int size);
-unsigned	long	get_horizontal_mask(int size);
-int					ft_resting_posx(t_tetriminos *elem, int i);
-int					ft_resting_posy(t_tetriminos *elem, int j);
-#endif
+int	main()
+{
+	int	ope = OPERATION;
+	printf("ope:%d\n", ope);
+	printf(BLA_BLA);
+	return (0);
+}
