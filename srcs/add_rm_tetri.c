@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:11:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/05 06:21:07 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/05 10:48:11 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ int	ft_push_tetriminos(t_tetriminos *elem)
 		{
 			while(IND_X < nb_windows)
 				if (ft_last_loop(elem, indice, dim, windows))
+					return (1);
 			elem->valu <<= 8;
 			(Y)++;
 		}

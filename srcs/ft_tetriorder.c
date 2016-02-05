@@ -6,12 +6,11 @@
 /*   By: tboos <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 18:14:15 by tboos             #+#    #+#             */
-/*   Updated: 2016/02/05 06:22:31 by tboos            ###   ########.fr       */
+/*   Updated: 2016/02/05 10:54:40 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "header.h"
-#include <stdio.h>
 
 static t_tetriminos			*ft_findbegin(t_tetriminos *begin)
 {
@@ -51,7 +50,7 @@ t_tetriminos			*ft_tetriorder(t_tetriminos *turtle, int len, int stage)
 		return (ft_findbegin(turtle));
 	else if (stage == len)
 		return (ft_reorder(turtle));
-	i = 0;
+	i = 2;
 	readymade = 0;
 	while (++i <= len - stage)
 	{
