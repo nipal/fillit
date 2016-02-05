@@ -19,7 +19,6 @@ S =		add_rm_tetri.c\
 		error.c\
 		filling.c\
 		fillit_structure.c\
-		ft_put.c\
 		ft_reorder.c\
 		ft_tetrilen.c\
 		ft_tetriorder.c\
