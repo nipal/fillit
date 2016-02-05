@@ -6,11 +6,12 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:23:53 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/04 23:55:20 by tboos            ###   ########.fr       */
+/*   Updated: 2016/02/05 02:54:19 by tboos            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structure.h"
+#include "print.h"
 
 static int		my_free(void *addr)
 {
@@ -73,5 +74,6 @@ int				fillit_structure(int fd)
 //	print_all_tetris(first_tetris);
 	ground = glb_ground(SET, ft_create_square());
 	first_tetris = ft_squ_lunch(first_tetris, ft_tetrilen(first_tetris));
+	ft_print_result(first_tetris);
 	return (0);
 }
