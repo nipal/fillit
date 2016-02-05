@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:11:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/05 00:36:11 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/05 03:53:54 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ unsigned	long	*ft_init_windows(t_coordone *pos, int stage)
 		i++;
 	}
 	free(pos);
-	return (wimdows);
+	return (windows);
 }
 
 int		ft_set_tetris(t_tetriminos *t, t_coordone *pos)
@@ -112,7 +112,7 @@ int		ft_last_loop(t_tetriminos *elem, t_coordone *indice, int dim
 
 int	ft_push_tetriminos(t_tetriminos *elem)
 {
-	t_coordone			indice;
+	t_coordone			*indice;
 	unsigned	long	wimdows[3];
 	int					nb_windows;
 	int					dim;
