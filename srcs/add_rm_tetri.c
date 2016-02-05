@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:11:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/05 03:53:54 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/05 04:15:47 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,15 @@ unsigned	long	ft_working_window(t_sqare *gr, t_coordone *pos
 
 unsigned	long	*ft_init_windows(t_coordone *pos, int stage)
 {
-	int							i;
-	static	unsigned	long	windows[3];
-	t_sqare						*ground;
-	int							nb_win;
+	int					i;
+	unsigned	long	*windows;
+	t_sqare				*ground;
+	int					nb_win;
 
 	ground = glb_ground(GET, 0);
 	nb_win = glb_nb_windows(GET, 0);
 	pos = create_coordone_y(stage * 4);
+	windows = (unsigned long *) malloc(sizeof(unsigned long) * 3);
 	i = 0;
 	while (i < nb_win)
 	{
@@ -86,7 +87,7 @@ void	ft_remouve_tetris(t_tetriminos *t)
 	gr->area[0][1] &= ~(((t->valu & ~mh & mv) >> p->x) << (8 * (8 - p->y)));
 	gr->area[1][0] &= ~(((t->valu & mh & ~mv) << (8 - p->x)) >> (8 * p->y));
 	gr->area[1][1] &= ~((t->valu & mh & mv) << (8 - p->x + (8 * (8 - p->y))));
-	free(pos);
+	free(p);
 }
 
 static	int		my_free(t_coordone *indice)
@@ -100,7 +101,7 @@ int		ft_last_loop(t_tetriminos *elem, t_coordone *indice, int dim
 {
 	while ((X < 7 - DIM_X) && X + (4 * IND_X) < dim - DIM_X)
 	{
-		if ((elem->value & windows[i] == 0)
+		if (((elem->valu & windows[IND_X]) == 0)
 			&& ft_set_tetris(elem, indice) && my_free(indice))
 			return (1);
 		elem->valu <<= 1;
@@ -113,11 +114,10 @@ int		ft_last_loop(t_tetriminos *elem, t_coordone *indice, int dim
 int	ft_push_tetriminos(t_tetriminos *elem)
 {
 	t_coordone			*indice;
-	unsigned	long	wimdows[3];
+	unsigned	long	*windows;
 	int					nb_windows;
 	int					dim;
 
-	i = 0;
 	indice = create_coordone();
 	nb_windows = glb_nb_windows(GET, 0);
 	dim = glb_sqr_dim(GET, 0);
@@ -133,6 +133,7 @@ int	ft_push_tetriminos(t_tetriminos *elem)
 		}
 		ft_resting_posy(elem, (IND_Y)++);
 	}
+	free(windows);
 	free(indice);
 	return (0);
 }
