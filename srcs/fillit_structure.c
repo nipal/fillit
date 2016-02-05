@@ -6,12 +6,13 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:23:53 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/05 02:54:19 by tboos            ###   ########.fr       */
+/*   Updated: 2016/02/05 03:44:25 by tboos            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structure.h"
 #include "print.h"
+#include "square_result.h"
 
 static int		my_free(void *addr)
 {
