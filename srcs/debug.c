@@ -6,11 +6,39 @@
 /*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 06:46:52 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/05 20:48:41 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/06 18:35:03 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "debug.h"
+
+void	print_ground(t_sqare *sqr)
+{
+	int	i;
+	int	j;
+	unsigned long unite;
+
+	j = 0;
+	unite = 1;
+	while (j < 16)
+	{
+		i = 0;
+		while (i < 16)
+		{
+			if (i == 8)
+				dprintf(1, " | ");
+			if (sqr->area[i/8][j/8] & (unite << ((i % 8) + (8 * (j % 8)))))
+				dprintf(1, "#");
+			else
+				dprintf(1, ".");
+			i++;
+		}
+		dprintf(1, "\n");
+		j++;
+		if (j == 8)
+			dprintf(1, "--------   --------\n");
+	}
+}
 
 void	print_tetris(t_tetriminos *piece)
 {
@@ -39,7 +67,7 @@ void	print_tetris(t_tetriminos *piece)
 
 void	print_coordone(t_coordone *pos, char *name)
 {
-	printf("%s: x:%d\n", name, pos->x);
+	printf("%s: x:%d ", name, pos->x);
 	printf("%s: y:%d\n", name, pos->y);
 }
 

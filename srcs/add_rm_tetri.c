@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:11:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/05 10:48:11 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/06 18:08:04 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ int		ft_set_tetris(t_tetriminos *t, t_coordone *pos)
 	pos->y *= 4;
 	mv = get_vertical_mask(pos->x);
 	mh = get_horizontal_mask(pos->y);
-	gr->area[0][0] |= (t->valu & ~mh & ~mv) >> (pos->x + (8 * pos->y));
-	gr->area[0][1] |= ((t->valu & ~mh & mv) >> pos->x) << (8 * (8 - pos->y));
-	gr->area[1][0] |= ((t->valu & mh & ~mv) << (8 - pos->x)) >> (8 * pos->y);
-	gr->area[1][1] |= (t->valu & mh & mv) << (8 - pos->x + (8 * (8 - pos->y)));
+	gr->area[0][0] |= (t->valu & mv & mh) >> (pos->x + (8 * pos->y));
+	gr->area[0][1] |= ((t->valu & mv & ~mh) >> pos->x) << (8 * (8 - pos->y));
+	gr->area[1][0] |= ((t->valu & ~mv & mh) << (8 - pos->x)) >> (8 * pos->y);
+	gr->area[1][1] |= (t->valu & ~mv & ~mh) << (8 - pos->x + (8 * (8 - pos->y)));
 	return (1);
 }
 
@@ -82,10 +82,10 @@ void	ft_remouve_tetris(t_tetriminos *t)
 	p->y = (t->pos->y / 4) * 4;
 	mv = get_vertical_mask(p->x);
 	mh = get_horizontal_mask(p->y);
-	gr->area[0][0] &= ~((t->valu & ~mh & ~mv) >> (p->x + (8 * p->y)));
-	gr->area[0][1] &= ~(((t->valu & ~mh & mv) >> p->x) << (8 * (8 - p->y)));
-	gr->area[1][0] &= ~(((t->valu & mh & ~mv) << (8 - p->x)) >> (8 * p->y));
-	gr->area[1][1] &= ~((t->valu & mh & mv) << (8 - p->x + (8 * (8 - p->y))));
+	gr->area[0][0] &= ~((t->valu & mv & mh) >> (p->x + (8 * p->y)));
+	gr->area[0][1] &= ~(((t->valu & mv & ~mh) >> p->x) << (8 * (8 - p->y)));
+	gr->area[1][0] &= ~(((t->valu & ~mv & mh) << (8 - p->x)) >> (8 * p->y));
+	gr->area[1][1] &= ~((t->valu & ~mv & ~mh) << (8 - p->x + (8 * (8 - p->y))));
 	free(p);
 }
 

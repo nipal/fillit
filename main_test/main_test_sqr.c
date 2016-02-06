@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   main_test_sqr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/05 18:23:53 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/27 08:21:48 by fjanoty          ###   ########.fr       */
+/*   Created: 2016/02/06 18:26:00 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/02/06 18:32:35 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
+#include <stdio.h>
+#include "square_result.h"
+#include "debug.h"
 
-# include <unistd.h>
-# include <string.h>
-# include <stdlib.h>
-
-typedef	struct		s_plateau
+int 	main()
 {
-	t_tetriminos	*pieces;
-	int				taille;
-}					t_plateau;
-void				generate_order(t_tetriminos tetri, int size
+	t_sqare *sqr;
 
-#endif
+	sqr = ft_create_square();
+	print_ground(sqr);
+	return (0);
+}
