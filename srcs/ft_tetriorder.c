@@ -6,7 +6,7 @@
 /*   By: tboos <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 18:14:15 by tboos             #+#    #+#             */
-/*   Updated: 2016/02/05 21:12:42 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/07 02:05:17 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,12 @@ t_tetriminos			*ft_tetriorder(t_tetriminos *turtle, int len, int stage)
 	t_tetriminos	*rabbit;
 	t_tetriminos	*test;
 
-	if (stage == len && ft_push_tetriminos(turtle))
+//dprintf(1, "%c", turtle->id);
+if (stage == len)
+{
+//dprintf(1, "\n");
+}
+	if (ft_push_tetriminos(turtle) && stage == len)
 		return (ft_findbegin(turtle));
 	else if (stage == len)
 		return (ft_reorder(turtle));
@@ -85,7 +90,6 @@ t_tetriminos			*ft_squ_lunch(t_tetriminos *begin, int len)
 	}
 	while (sq < 16)
 	{
-dprintf(1, "#### len:%d\n", sq);
 		glb_sqr_dim(SET, sq);
 		if((result = ft_tetriorder(begin, len, 0)))
 			return (result);

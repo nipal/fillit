@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 06:46:52 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/06 18:35:03 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/07 03:53:56 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	print_ground(t_sqare *sqr)
 
 	j = 0;
 	unite = 1;
+	dprintf(1, "len_sqr:%d\n", sqr->dim);
 	while (j < 16)
 	{
 		i = 0;
@@ -27,7 +28,7 @@ void	print_ground(t_sqare *sqr)
 		{
 			if (i == 8)
 				dprintf(1, " | ");
-			if (sqr->area[i/8][j/8] & (unite << ((i % 8) + (8 * (j % 8)))))
+			if (sqr->area[i / 8][j / 8] & (unite << ((i % 8) + (8 * (j % 8)))))
 				dprintf(1, "#");
 			else
 				dprintf(1, ".");
@@ -49,10 +50,10 @@ void	print_tetris(t_tetriminos *piece)
 	printf("\n");
 	unite = 1;
 	j = 0;
-	while (j < 4)
+	while (j < 8)
 	{
 		i = 0;
-		while (i < 4)
+		while (i < 8)
 		{
 			if (piece->valu & (unite << (j * 8 + i)))
 				printf("#");

@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 19:09:50 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/05 06:27:33 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/07 03:53:57 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define Y elem->pos->y
 # define X elem->pos->x
+# define DIM elem->dim
 # define DIM_X elem->dim->x
 # define DIM_Y elem->dim->y
 # define IND_Y indice->y
