@@ -43,7 +43,6 @@ t_tetriminos			*ft_tetriorder(t_tetriminos *turtle, int len, int stage)
 {
 	short			i;
 	int				readymade;
-	int				input;
 	t_tetriminos	*rabbit;
 	t_tetriminos	*test;
 
