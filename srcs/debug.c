@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 06:46:52 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/07 03:53:56 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/07 13:21:40 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_working_windows(unsigned long *windows)
 	nb_windows = glb_nb_windows(GET, 0);
 	while (j < nb_windows)
 	{
-		dprintf(1, "windows:%d\n", j);
+		dprintf(1, "windows:%d", j);
 		tet->valu = windows[j];
 		print_tetris(tet);
 		j++;

@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:11:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/07 03:54:51 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/07 15:27:04 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ unsigned	long	ft_working_window(t_sqare *gr, t_coordone *pos)
 	mh = get_horizontal_mask(pos->x);
 	mv = get_horizontal_mask(pos->y);
 	ecr = ((gr->area[0][0] & ~mv & ~mh) >> (pos->x + (8 * pos->y)));
-	ecr |= (((gr->area[0][1] & ~mv & mh) >> pos->x) << (8 * (8 - pos->y)));
-	ecr |= (((gr->area[1][0] & mv & ~mh) << (8 - pos->x)) >> (8 * (pos->y)));
-	ecr |= ((gr->area[1][1] & mv & mh) << ((8 - pos->x) + (8 * (8 - pos->y))));
+	ecr |= (((gr->area[0][1] & ~mv & ~mh) >> pos->x) << (8 * (8 - pos->y)));
+	ecr |= (((gr->area[1][0] & ~mv & ~mh) << (8 - pos->x)) >> (8 * (pos->y)));
+	ecr |= ((gr->area[1][1] & ~mv & ~mh) << ((8 - pos->x) + (8 * (8 - pos->y))));
 	return (ecr);
 }
 
@@ -61,12 +61,12 @@ int		ft_set_tetris(t_tetriminos *t, t_coordone *pos)
 	gr = glb_ground(GET, 0);
 	pos->x *= 4;
 	pos->y *= 4;
-	mv = get_vertical_mask(pos->x);
-	mh = get_horizontal_mask(pos->y);
-	gr->area[0][0] |= (t->valu & ~mv & ~mh) >> (pos->x + (8 * pos->y));
-	gr->area[0][1] |= ((t->valu & ~mv & mh) >> pos->x) << (8 * (8 - pos->y));
-	gr->area[1][0] |= ((t->valu & mv & ~mh) << (8 - pos->x)) >> (8 * pos->y);
-	gr->area[1][1] |= (t->valu & mv & mh) << (8 - pos->x + (8 * (8 - pos->y)));
+	mv = get_vertical_mask(8 -pos->x);
+	mh = get_horizontal_mask(8 - pos->y);
+	gr->area[0][0] |= (t->valu & mv & mh) << (pos->x + (8 * pos->y));
+	gr->area[0][1] |= ((t->valu & mv & ~mh) << pos->x) >> (8 * (8 - pos->y ));
+	gr->area[1][0] |= ((t->valu & ~mv & mh) >> (8 - pos->x)) << (8 * pos->y);
+	gr->area[1][1] |= (t->valu & ~mv & ~mh) >> (8 - pos->x + (8 * (8 - pos->y)));
 //dprintf(1, "####################\n");
 //print_ground(gr);
 	return (1);
