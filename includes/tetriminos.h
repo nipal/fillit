@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 06:15:34 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/27 07:21:10 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/08 00:45:31 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include "coordone.h"
 # include "error.h"
 
+/*	dim: dimentionde la piece	*/
+/*	pos: nombre de decalage que la piece a subi	*/
+/*	ecr: numerot quand on pushle tetri	*/
 typedef	struct s_tetriminos	t_tetriminos;
 struct				s_tetriminos
 {
@@ -28,6 +31,7 @@ struct				s_tetriminos
 	int				gap;
 	t_coordone		*dim;
 	t_coordone		*pos;
+	t_coordone		*ecr;
 };
 
 t_tetriminos		*create_tetriminos(int id);

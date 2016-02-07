@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:11:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/07 18:30:37 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/08 00:54:44 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,44 +52,31 @@ unsigned	long	*ft_init_windows(t_coordone *pos, int stage)
 	return (windows);
 }
 
-int		ft_set_tetris(t_tetriminos *t, t_coordone *pos)
+int		ft_set_tetris(t_tetriminos *t, int x, int y)
 {
 	unsigned	long	mh;
 	unsigned	long	mv;
 	t_sqare				*gr;
 
 	gr = glb_ground(GET, 0);
-	pos->x *= 4;
-	pos->y *= 4;
-	mv = get_vertical_mask(8 -pos->x);
-	mh = get_horizontal_mask(8 - pos->y);
-	gr->area[0][0] |= (t->valu & mv & mh) << (pos->x + (8 * pos->y));
-	gr->area[0][1] |= ((t->valu & mv & ~mh) << pos->x) >> (8 * (8 - pos->y ));
-	gr->area[1][0] |= ((t->valu & ~mv & mh) >> (8 - pos->x)) << (8 * pos->y);
-	gr->area[1][1] |= (t->valu & ~mv & ~mh) >> (8 - pos->x + (8 * (8 - pos->y)));
+	x *= 4;
+	y *= 4;
+	mv = get_vertical_mask(8 - x);
+	mh = get_horizontal_mask(8 - y);
+	gr->area[0][0] ^= (t->valu & mv & mh) << (x + (8 * y));
+	gr->area[0][1] ^= ((t->valu & mv & ~mh) << x) >> (8 * (8 - y ));
+	gr->area[1][0] ^= ((t->valu & ~mv & mh) >> (8 - x)) << (8 * y);
+	gr->area[1][1] ^= (t->valu & ~mv & ~mh) >> (8 - x + (8 * (8 - y)));
 	return (1);
 }
 
-void	ft_remouve_tetris(t_tetriminos *t)
+void	ft_remouve_tetris(t_tetriminos *tetri)
 {
-	unsigned	long	mh;
-	unsigned	long	mv;
-	t_coordone			*p;
-	t_sqare				*gr;
-
-	p = create_coordone();
-
-	gr = glb_ground(GET, 0);
-	p->x = (t->pos->x / 4) * 4;
-	p->y = (t->pos->y / 4) * 4;
-	mv = get_vertical_mask(p->x);
-	mh = get_horizontal_mask(p->y);
-	gr->area[0][0] &= ~((t->valu & ~mv & ~mh)<< (p->x + (8 * p->y)));
-//print_worin
-	gr->area[0][1] &= ~(((t->valu & ~mv & mh) << p->x) >> (8 * (8 - p->y)));
-	gr->area[1][0] &= ~(((t->valu & mv & ~mh) >> (8 - p->x)) << (8 * p->y));
-	gr->area[1][1] &= ~((t->valu & mv & mh) >> (8 - p->x + (8 * (8 - p->y))));
-	free(p);
+	ft_set_tetris(tetri, tetri->ecr->x, tetri->ecr->y);
+	ft_resting_posx(tetri);
+	ft_resting_posy(tetri);
+	tetri->ecr->x = 0;
+	tetri->ecr->y = 0;
 }
 
 static	int		my_free(t_coordone *indice)
@@ -103,8 +90,9 @@ int		ft_last_loop(t_tetriminos *elem, t_coordone *indice, int dim
 {
 	while ((X < 8 - DIM_X) && X + (4 * IND_X) < dim - DIM_X)
 	{
+//modif  pour compiler
 		if (((elem->valu & windows[IND_X]) == 0)
-			&& ft_set_tetris(elem, indice) && my_free(indice))
+			&& ft_set_tetris(elem, 0, 0) && my_free(indice))
 		{
 dprintf(1 , "%c MATCH IN   x:%d y:%d	", elem->id, X, Y);
 dprintf(1, "e->val:%ld & w->val:%ld = %ld\n", elem->valu, windows[IND_X], (elem->valu & windows[IND_X]));

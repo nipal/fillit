@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 06:06:49 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/05 21:07:51 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/07 23:16:24 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ t_tetriminos	*create_tetriminos(int id)
 	t_tetriminos	*piece;
 	if (!(piece = (t_tetriminos*)malloc(sizeof(t_tetriminos))))
 		return (NULL);
-	if (!(piece->dim = create_coordone()) || !(piece->pos = create_coordone()))
+	if (!(piece->dim = create_coordone()) || !(piece->pos = create_coordone())
+		|| !(piece->ecr = create_coordone()))
 		return (NULL);
 	piece->id = id + 'A';
 	piece->valu = 0;
@@ -60,6 +61,9 @@ int	tetris_free(t_tetriminos *elem)
 		while (elem)
 		{
 			save = (elem)->next;
+			free(elem->ecr);
+			free(elem->pos);
+			free(elem->dim);
 			free(elem);
 			elem = save;
 		}
