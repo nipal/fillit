@@ -6,7 +6,7 @@
 #include "coordone.h"
 #include "square_result.h"
 
-void	make_tetri_1(t_tetriminos *elem)
+void	make_tetri_1(t_tetriminos *elem, t_coordone *incr)
 {
 	unsigned	long	alter1;
 	unsigned	long	alter2;
@@ -21,6 +21,7 @@ void	make_tetri_1(t_tetriminos *elem)
 	elem->valu = (alter) | ((alter) << 16) | ((alter) << 32) |  ((alter) << 48);
 	elem->dim->x = 1;
 	elem->dim->y = 8;
+	elem->pos->x = incr;
 	elem->valu = 72340172838076673;
 	elem->valu |= 255;
 
@@ -78,6 +79,7 @@ int	main(int ac, char **av)
 	make_tetri_1(tetri_1);
 	ft_set_tetris(tetri_1, pos);
 	print_tetris(tetri_1);
+	ft_remouve_tetris(tetri_1);
 
 	windows = ft_init_windows(pos, 0);
 	print_ground(gr);
