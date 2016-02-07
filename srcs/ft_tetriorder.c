@@ -6,12 +6,11 @@
 /*   By: tboos <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 18:14:15 by tboos             #+#    #+#             */
-/*   Updated: 2016/02/07 02:05:17 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/07 17:51:02 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
-#include <stdio.h>
+# include "header.h"
 
 static t_tetriminos			*ft_findbegin(t_tetriminos *begin)
 {
@@ -25,12 +24,12 @@ static t_tetriminos 	*ft_followrightrabbit(t_tetriminos *rabbit, short *i, int *
 	short			tmp;
 
 	tmp = *i;
-	while (tmp)
+	while (tmp && rabbit)
 	{
 		rabbit = rabbit->next;
 		tmp--;
 	}
-	while (rabbit && !(*readymade & rabbit->type))
+	while (rabbit && (*readymade & rabbit->type))
 	{
 		rabbit = rabbit->next;
 		(*i)++;
@@ -47,28 +46,24 @@ t_tetriminos			*ft_tetriorder(t_tetriminos *turtle, int len, int stage)
 	t_tetriminos	*rabbit;
 	t_tetriminos	*test;
 
-//dprintf(1, "%c", turtle->id);
-if (stage == len)
-{
-//dprintf(1, "\n");
-}
-	if (ft_push_tetriminos(turtle) && stage == len)
+	if (stage == len && ft_push_tetriminos(turtle))
 		return (ft_findbegin(turtle));
 	else if (stage == len)
 		return (ft_reorder(turtle));
-	i = 2;
+	i = 0;
 	readymade = 0;
-	while (++i <= len - stage)
+	while (++i <= len - stage || rabbit)
 	{
-		if ((test = ft_tetriorder(turtle->next, len, stage + 1)))
-			return (test);
+		if (ft_push_tetriminos(turtle))
+			if ((test = ft_tetriorder(turtle->next, len, stage + 1)))
+				return (test);
+		else
+			return (ft_reorder(turtle));
 		rabbit = ft_followrightrabbit(turtle, &i, &readymade);
 		ft_tetriswap(turtle, rabbit);
 		if (rabbit)
 			turtle = rabbit;
 	}
-	if (rabbit && (test = ft_tetriorder(turtle->next, len, stage + 1)))
-			return (test);
 	return (ft_reorder(turtle));
 }
 
