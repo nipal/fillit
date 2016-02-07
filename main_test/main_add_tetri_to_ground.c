@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_add_tetri_to_ground.c                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/02/07 18:00:17 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/02/07 18:12:17 by fjanoty          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include "debug.h"
 #include "add_rm_tetri.h"
@@ -52,7 +64,7 @@ void	print_all_mask()
 	i = 0;
 	while (i < 9)
 	{
-		dprintf(1, "mask horizontl:%d\n", i);
+		dprintf(1, "mask horizontal:%d\n", i);
 		tetri->valu = get_horizontal_mask(i);
 		print_tetris(tetri);
 		i++;
@@ -73,7 +85,8 @@ int	main(int ac, char **av)
 	glb_ground(SET, gr);
 	tetri_1 = create_tetriminos(0);
 
-	pos->y = 2;
+//enfait la on parle plutot d'ecran cad que c'est une position * 4
+	pos->y = 2; 
 	pos->x = 1;
 
 	make_tetri_1(tetri_1);
