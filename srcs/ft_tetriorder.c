@@ -43,6 +43,7 @@ t_tetriminos			*ft_tetriorder(t_tetriminos *turtle, int len, int stage)
 {
 	short			i;
 	int				readymade;
+	int				input;
 	t_tetriminos	*rabbit;
 	t_tetriminos	*test;
 
@@ -54,8 +55,9 @@ t_tetriminos			*ft_tetriorder(t_tetriminos *turtle, int len, int stage)
 	readymade = 0;
 	while (++i <= len - stage)
 	{
-		if ((test = ft_tetriorder(turtle->next, len, stage + 1)))
-			return (test);
+		if (ft_push_tetriminos(turtle))
+			if ((test = ft_tetriorder(turtle->next, len, stage + 1)))
+				return (test);
 		rabbit = ft_followrightrabbit(turtle, &i, &readymade);
 		ft_tetriswap(turtle, rabbit);
 		if (rabbit)
