@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/07 18:00:17 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/07 18:12:17 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/07 18:30:15 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	make_tetri_1(t_tetriminos *elem, t_coordone *incr)
 	elem->valu = (alter) | ((alter) << 16) | ((alter) << 32) |  ((alter) << 48);
 	elem->dim->x = 1;
 	elem->dim->y = 8;
-	elem->pos->x = incr;
+//	elem->pos->x = incr->x;
 	elem->valu = 72340172838076673;
 	elem->valu |= 255;
 
@@ -81,16 +81,17 @@ int	main(int ac, char **av)
 
 	gr = ft_create_square();
 	pos = create_coordone();
-	gr->dim = 16;
+	gr->dim = 1;
 	glb_ground(SET, gr);
 	tetri_1 = create_tetriminos(0);
 
 //enfait la on parle plutot d'ecran cad que c'est une position * 4
-	pos->y = 2; 
-	pos->x = 1;
+	pos->y = 0; 
+	pos->x = 0;
 
-	make_tetri_1(tetri_1);
+	make_tetri_1(tetri_1, 0);
 	ft_set_tetris(tetri_1, pos);
+tetri_1->valu = 0xFFFFFFFFFFFFFFFF;
 	print_tetris(tetri_1);
 	ft_remouve_tetris(tetri_1);
 

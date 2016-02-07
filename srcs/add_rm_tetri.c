@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:11:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/07 18:05:25 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/07 18:30:37 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,11 @@ void	ft_remouve_tetris(t_tetriminos *t)
 	p->y = (t->pos->y / 4) * 4;
 	mv = get_vertical_mask(p->x);
 	mh = get_horizontal_mask(p->y);
-	gr->area[0][0] &= ~((t->valu & ~mv & ~mh) >> (p->x + (8 * p->y)));
-	gr->area[0][1] &= ~(((t->valu & ~mv & mh) >> p->x) << (8 * (8 - p->y)));
-	gr->area[1][0] &= ~(((t->valu & mv & ~mh) << (8 - p->x)) >> (8 * p->y));
-	gr->area[1][1] &= ~((t->valu & mv & mh) << (8 - p->x + (8 * (8 - p->y))));
+	gr->area[0][0] &= ~((t->valu & ~mv & ~mh)<< (p->x + (8 * p->y)));
+//print_worin
+	gr->area[0][1] &= ~(((t->valu & ~mv & mh) << p->x) >> (8 * (8 - p->y)));
+	gr->area[1][0] &= ~(((t->valu & mv & ~mh) >> (8 - p->x)) << (8 * p->y));
+	gr->area[1][1] &= ~((t->valu & mv & mh) >> (8 - p->x + (8 * (8 - p->y))));
 	free(p);
 }
 
