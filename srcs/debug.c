@@ -12,6 +12,26 @@
 
 #include "debug.h"
 
+void	print_working_windows(unsigned long *windows)
+{
+	int	nb_windows;
+	int	j;
+	t_tetriminos	*tet;
+
+	j = 0;
+	tet = create_tetriminos(0);
+	nb_windows = glb_nb_windows(GET, 0);
+	while (j < nb_windows)
+	{
+		dprintf(1, "windows:%d\n", j);
+		tet->valu = windows[j];
+		print_tetris(tet);
+		j++;
+	}
+	dprintf(1, "\n");
+	free(tet);
+}
+
 void	print_ground(t_sqare *sqr)
 {
 	int	i;
@@ -47,7 +67,7 @@ void	print_tetris(t_tetriminos *piece)
 	int					j;
 	unsigned	long	unite;
 
-	printf("\n");
+	dprintf(1, "\n");
 	unite = 1;
 	j = 0;
 	while (j < 8)
@@ -56,29 +76,29 @@ void	print_tetris(t_tetriminos *piece)
 		while (i < 8)
 		{
 			if (piece->valu & (unite << (j * 8 + i)))
-				printf("#");
+				dprintf(1, "#");
 			else
-				printf(".");
+				dprintf(1, ".");
 			i++;
 		}
-		printf("\n");
+		dprintf(1, "\n");
 		j++;
 	}
 }
 
 void	print_coordone(t_coordone *pos, char *name)
 {
-	printf("%s: x:%d ", name, pos->x);
-	printf("%s: y:%d\n", name, pos->y);
+	dprintf(1, "%s: x:%d ", name, pos->x);
+	dprintf(1, "%s: y:%d\n", name, pos->y);
 }
 
 void	describe_tetris(t_tetriminos *tetris)
 {
 	print_tetris(tetris);
-	printf("valu :%ld   ", (long)tetris->valu);
-	printf("id   :%c   ", tetris->id);
-	printf("type :%d   ", tetris->type);
-	printf("gap  :%d\n", tetris->gap);
+	dprintf(1, "valu :%ld   ", (long)tetris->valu);
+	dprintf(1, "id   :%c   ", tetris->id);
+	dprintf(1, "type :%d   ", tetris->type);
+	dprintf(1, "gap  :%d\n", tetris->gap);
 	print_coordone(tetris->dim, " dim");
 	print_coordone(tetris->pos, " pos");
 }

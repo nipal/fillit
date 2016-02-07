@@ -57,7 +57,6 @@ void	ft_add_strtetri(t_tetriminos *elem, t_coordone *pos, char *str, int len)
 void	ft_print_result(t_tetriminos *begin)
 {
 	t_coordone			*pos;
-	t_coordone			*indice;
 	int					len;
 	char	*result;
 
@@ -65,7 +64,6 @@ print_all_tetris(begin);
 print_ground(glb_ground(GET, 0));
 dprintf(1, "len_tetri:%d\n", ft_tetrilen(begin) + 1);
 	pos = create_coordone();
-	indice = create_coordone();
 	len = glb_sqr_dim(GET, 0) - 1;
 	result = ft_init_str_result(len);
 	while (begin)

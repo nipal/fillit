@@ -33,6 +33,7 @@ SRC = $(addprefix srcs/,$(S))
 all: $(NAME)
 
 $(NAME): $(OBJ)
+	gcc _generateur_fillit.c -o generateur
 	gcc $(FLAGS) $(SRC) -I includes libft.a -o $(NAME)
 
 clean:
