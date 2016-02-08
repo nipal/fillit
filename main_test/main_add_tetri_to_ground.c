@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/07 18:00:17 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/08 16:10:06 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/08 16:25:36 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,8 @@ int	main(int ac, char **av)
 	pos->y = 1; 
 	pos->x = 1;
 
-//	make_tetri_1(tetri_1, 0);
-	make_tetri_2(tetri_1);
+	make_tetri_1(tetri_1, 0);
+//	make_tetri_2(tetri_1);
 	ft_set_tetris(tetri_1, pos->x, pos->y);
 //	ft_set_tetris(tetri_1, pos->x, pos->y);
 //tetri_1->valu = 0xFFFFFFFFFFFFFFFF;
@@ -134,7 +134,14 @@ int	main(int ac, char **av)
 //	print_tetris(tetri_1);
 //	ft_remouve_tetris(tetri_1);
 
-	windows = ft_init_windows(pos, 0);
+
+	gr->area[0][0] = tetri_1->valu;
+	gr->area[0][1] = 0;
+	gr->area[1][0] = ~(0);
+	gr->area[1][1] = 0;
+
+	windows = ft_init_windows(pos, 1);
+
 	print_ground(gr);
 	print_working_windows(windows);
 
