@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:11:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/08 00:54:44 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/08 16:10:07 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ unsigned	long	ft_working_window(t_sqare *gr, t_coordone *pos)
 
 	mh = get_horizontal_mask(pos->x);
 	mv = get_horizontal_mask(pos->y);
-	ecr = ((gr->area[0][0] & ~mv & ~mh) >> (pos->x + (8 * pos->y)));
-	ecr |= (((gr->area[0][1] & ~mv & ~mh) >> pos->x) << (8 * (8 - pos->y)));
-	ecr |= (((gr->area[1][0] & ~mv & ~mh) << (8 - pos->x)) >> (8 * (pos->y)));
-	ecr |= ((gr->area[1][1] & ~mv & ~mh) << ((8 - pos->x) + (8 * (8 - pos->y))));
+	ecr = ((gr->area[0][0] & ~mv & ~mh) );//  >> (pos->x + (8 * pos->y)));
+	ecr |= (((gr->area[0][1] & ~mv & mh) ));//  >> pos->x) << (8 * (8 - pos->y)));
+	ecr |= (((gr->area[1][0] & mv & ~mh) ));//  << (8 - pos->x)) >> (8 * (pos->y)));
+	ecr |= ((gr->area[1][1] & mv & mh) );//  << ((8 - pos->x) + (8 * (8 - pos->y))));
 	return (ecr);
 }
 
