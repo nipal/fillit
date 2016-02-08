@@ -19,6 +19,6 @@
 
 unsigned	long	get_vertical_mask(int size);
 unsigned	long	get_horizontal_mask(int size);
-int					ft_resting_posx(t_tetriminos *elem, int i);
-int					ft_resting_posy(t_tetriminos *elem, int j);
+int					ft_resting_posx(t_tetriminos *elem);
+int					ft_resting_posy(t_tetriminos *elem);
 #endif

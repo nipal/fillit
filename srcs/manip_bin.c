@@ -68,16 +68,16 @@ unsigned	long	get_horizontal_mask(int size)
 	return (masks[size]);
 }
 
-int		ft_resting_posx(t_tetriminos *elem, int i)
+int		ft_resting_posx(t_tetriminos *elem)
 {
 	elem->valu >>= (elem->pos->x);
 	elem->pos->x = 0;
-	return (i);
+	return (0);
 }
 
-int		ft_resting_posy(t_tetriminos *elem, int j)
+int		ft_resting_posy(t_tetriminos *elem)
 {
 	elem->valu >>= ((elem->pos->y) * 8);
 	elem->pos->y = 0;
-	return (j);
+	return (0);
 }

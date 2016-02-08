@@ -79,6 +79,7 @@ void	ft_remouve_tetris(t_tetriminos *tetri)
 	tetri->ecr->y = 0;
 }
 
+
 static	int		my_free(t_coordone *indice)
 {
 	free(indice);
@@ -104,14 +105,7 @@ dprintf(1, "e->val:%ld & w->val:%ld = %ld\n", elem->valu, windows[IND_X], (elem-
 		(X)++;
 	}
 	(IND_X)++;
-/*
-if (IND_Y == nb_windows - 1 && IND_X == )
-{
-dprintf(1, "fail:%c\n", elem->id);
-//print_tetris(elem);
-}
-//*/
-	ft_resting_posx(elem, 0);
+	ft_resting_posx(elem);
 	return (0);
 }
 
@@ -140,9 +134,10 @@ dprintf(1, "		nb_win:%d\n", nb_windows);
 			(Y)++;
 		}
 		(IND_Y)++;
-		ft_resting_posy(elem, 0);
+		ft_resting_posy(elem);
 	}
 	free(windows);
 	free(indice);
 	return (0);
 }
+
