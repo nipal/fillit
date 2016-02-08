@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:03:34 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/07 03:53:55 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/08 17:16:07 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ dprintf(1, "len_tetri:%d\n", ft_tetrilen(begin) + 1);
 	{
 dprintf(1, "print_piece:%c\n", begin->id);
 		copy_coordone(pos, begin->pos);
-		ft_resting_posx(begin, 0);
-		ft_resting_posy(begin, 0);
+		ft_resting_posx(begin);
+		ft_resting_posy(begin);
 		ft_add_strtetri(begin, pos, result, len);
 		begin = begin->next;
 	}

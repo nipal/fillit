@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:11:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/08 16:25:38 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/08 17:31:25 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,65 +79,43 @@ void	ft_remouve_tetris(t_tetriminos *tetri)
 	tetri->ecr->y = 0;
 }
 
-
-static	int		my_free(t_coordone *indice)
+int		ft_last_loop(t_tetriminos *elem, int dim, unsigned long *windows)
 {
-	free(indice);
-	return (1);
-}
-
-int		ft_last_loop(t_tetriminos *elem, t_coordone *indice, int dim
-		, unsigned long *windows)
-{
-	while ((X < 8 - DIM_X) && X + (4 * IND_X) < dim - DIM_X)
+	while ((X < 8 - DIM_X) && X + (4 * ECR_X) < dim - DIM_X)
 	{
-//modif  pour compiler
-		if (((elem->valu & windows[IND_X]) == 0)
-			&& ft_set_tetris(elem, 0, 0) && my_free(indice))
-		{
-dprintf(1 , "%c MATCH IN   x:%d y:%d	", elem->id, X, Y);
-dprintf(1, "e->val:%ld & w->val:%ld = %ld\n", elem->valu, windows[IND_X], (elem->valu & windows[IND_X]));
-			X += IND_X * 4;
-			Y += IND_Y * 4;
+		if (((elem->valu & windows[ECR_X]) == 0)
+			&& ft_set_tetris(elem, ECR_X, ECR_Y))
 			return (1);
-		}
 		elem->valu <<= 1;
 		(X)++;
 	}
-	(IND_X)++;
+	(ECR_X)++;
 	ft_resting_posx(elem);
 	return (0);
 }
 
 int	ft_push_tetriminos(t_tetriminos *elem)
 {
-	t_coordone			*indice;
 	unsigned	long	*windows;
 	int					nb_windows;
 	int					dim;
 
-//dprintf(1, "push-->id:%c\n", elem->id);
-	indice = create_coordone();
 	nb_windows = glb_nb_windows(GET, 0);
 	dim = glb_sqr_dim(GET, 0);
-dprintf(1, "		push_dim:%d\n", dim);
-dprintf(1, "		nb_win:%d\n", nb_windows);
-	while (IND_Y < nb_windows)
+	while (ECR_Y < nb_windows)
 	{
-		windows = ft_init_windows(0, IND_Y);
-		while ((Y < 8 - DIM_Y) && Y + (4 * IND_Y) < dim - DIM_Y)
+		windows = ft_init_windows(0, ECR_Y);
+		while ((Y < 8 - DIM_Y) && Y + (4 * ECR_Y) < dim - DIM_Y)
 		{
-			while(IND_X < nb_windows)
-				if (ft_last_loop(elem, indice, dim, windows))
+			while(ECR_X < nb_windows)
+				if (ft_last_loop(elem, dim, windows))
 					return (1);
 			elem->valu <<= 8;
 			(Y)++;
 		}
-		(IND_Y)++;
+		(ECR_Y)++;
 		ft_resting_posy(elem);
 	}
-	free(windows);
-	free(indice);
+//	free(windows);
 	return (0);
 }
-

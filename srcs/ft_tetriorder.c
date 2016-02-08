@@ -6,7 +6,7 @@
 /*   By: tboos <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 18:14:15 by tboos             #+#    #+#             */
-/*   Updated: 2016/02/07 17:51:02 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/08 17:17:45 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ t_tetriminos			*ft_tetriorder(t_tetriminos *turtle, int len, int stage)
 	while (++i <= len - stage || rabbit)
 	{
 		if (ft_push_tetriminos(turtle))
+		{
 			if ((test = ft_tetriorder(turtle->next, len, stage + 1)))
 				return (test);
+		}
 		else
 			return (ft_reorder(turtle));
 		rabbit = ft_followrightrabbit(turtle, &i, &readymade);

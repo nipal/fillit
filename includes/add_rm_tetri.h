@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 19:09:50 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/08 00:54:48 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/08 17:35:55 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,10 @@
 
 # define Y elem->pos->y
 # define X elem->pos->x
-# define DIM elem->dim
 # define DIM_X elem->dim->x
 # define DIM_Y elem->dim->y
-# define IND_Y indice->y
-# define IND_X indice->x
+# define ECR_Y elem->ecr->y
+# define ECR_X elem->ecr->x
 
 unsigned	long	ft_working_window(t_sqare *gr, t_coordone *pos);
 unsigned	long	*ft_init_windows(t_coordone *pos, int stage);
