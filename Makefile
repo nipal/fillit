@@ -29,6 +29,18 @@ S =		add_rm_tetri.c\
 		square_result.c\
 		tetriminos.c
 
+D =		tetriminos.c\
+		glb.c\
+		square_result.c\
+		manip_bin.c\
+		debug.c\
+		coordone.c\
+		print.c\
+		ft_tetrilen.c\
+		add_rm_tetri.c
+
+DEBUG = $(addprefix srcs/,$(D))
+
 SRC = $(addprefix srcs/,$(S))
 all: $(NAME)
 
@@ -43,3 +55,8 @@ fclean: clean
 	rm -f $(NAME) 
 
 re: fclean $(NAME)
+
+debug:
+	rm -f a.out;
+	gcc main_test/main_add_tetri_to_ground.c libft.a  $(DEBUG) -I includes
+

@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:11:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/08 17:31:25 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/09 01:53:07 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,41 +15,39 @@
 #include <stdio.h>
 
 /*area[x][y]*/
-unsigned	long	ft_working_window(t_sqare *gr, t_coordone *pos)
+unsigned	long	ft_working_window(t_sqare *gr, int x, int y)
 {
 	unsigned	long	mh;
 	unsigned	long	mv;
 	unsigned	long	ecr;
 
-	mh = get_vertical_mask(pos->x);
-	mv = get_horizontal_mask(pos->y);
-	ecr = ((gr->area[0][0] & ~mv & ~mh) >> (pos->x + (8 * pos->y)));
-	ecr |= (((gr->area[0][1] & mv & ~mh) >> pos->x) << (8 * (8 - pos->y)));
-	ecr |= (((gr->area[1][0] & ~mv & mh) << (8 - pos->x)) >> (8 * (pos->y)));
-	ecr |= ((gr->area[1][1] & mv & mh) << ((8 - pos->x) + (8 * (8 - pos->y))));
+	mh = get_vertical_mask(x);
+	mv = get_horizontal_mask(y);
+	ecr = ((gr->area[0][0] & ~mv & ~mh) >> (x + (8 * y)));
+	ecr |= (((gr->area[0][1] & mv & ~mh) >> x) << (8 * (8 - y)));
+	ecr |= (((gr->area[1][0] & ~mv & mh) << (8 - x)) >> (8 * y));
+	ecr |= ((gr->area[1][1] & mv & mh) << ((8 - x) + (8 * (8 - y))));
 	return (ecr);
 }
 
-unsigned	long	*ft_init_windows(t_coordone *pos, int stage)
+void	ft_init_windows(unsigned long *windows, int stage)
 {
 	int					i;
-	unsigned	long	*windows;
 	t_sqare				*ground;
 	int					nb_win;
+	int					x;
+	int					y;
 
 	ground = glb_ground(GET, 0);
 	nb_win = glb_nb_windows(GET, 0);
-	pos = create_coordone_y(stage * 4);
-	windows = (unsigned long *) malloc(sizeof(unsigned long) * 3);
 	i = 0;
+	y = stage * 4;
 	while (i < nb_win)
 	{
-		pos->x = (i * 4);
-		windows[i] = ft_working_window(ground, pos);
+		x = (i * 4);
+		windows[i] = ft_working_window(ground, x, y);
 		i++;
 	}
-	free(pos);
-	return (windows);
 }
 
 int		ft_set_tetris(t_tetriminos *t, int x, int y)
@@ -83,12 +81,16 @@ int		ft_last_loop(t_tetriminos *elem, int dim, unsigned long *windows)
 {
 	while ((X < 8 - DIM_X) && X + (4 * ECR_X) < dim - DIM_X)
 	{
-		if (((elem->valu & windows[ECR_X]) == 0)
-			&& ft_set_tetris(elem, ECR_X, ECR_Y))
+		if ((elem->valu & windows[ECR_X]) == 0)
+		{
+			ft_set_tetris(elem, ECR_X, ECR_Y);
 			return (1);
+		}
 		elem->valu <<= 1;
 		(X)++;
+//dprintf(1, "CHANGEMANE DE COLONE x:%d y:%d ecrx:%d ecry:%d\n", X, Y, ECR_X, ECR_Y);
 	}
+//dprintf(1, "=========================X:%d  max:%d\n",  X + (4 * ECR_X), dim - DIM_X);
 	(ECR_X)++;
 	ft_resting_posx(elem);
 	return (0);
@@ -96,26 +98,46 @@ int		ft_last_loop(t_tetriminos *elem, int dim, unsigned long *windows)
 
 int	ft_push_tetriminos(t_tetriminos *elem)
 {
-	unsigned	long	*windows;
+	unsigned	long	windows[3];
 	int					nb_windows;
 	int					dim;
 
 	nb_windows = glb_nb_windows(GET, 0);
 	dim = glb_sqr_dim(GET, 0);
+	ECR_X = 0;
+//dprintf(1, "ecr_x:%d	ecr_y:%d\n", ECR_X, ECR_Y);
+//dprintf(1, "nb_windows:%d\n", nb_windows);
 	while (ECR_Y < nb_windows)
 	{
-		windows = ft_init_windows(0, ECR_Y);
+		ft_init_windows(windows, ECR_Y);
 		while ((Y < 8 - DIM_Y) && Y + (4 * ECR_Y) < dim - DIM_Y)
 		{
+//dprintf(1, "		ecr	X:%d\n", ECR_X);
 			while(ECR_X < nb_windows)
+			{
 				if (ft_last_loop(elem, dim, windows))
 					return (1);
+			}
+			ECR_X = 0;
+	//		ft_resting_posx(elem);
 			elem->valu <<= 8;
 			(Y)++;
+//dprintf(1, "CHANGEMANE DE LIIIIIGNE x:%d y:%d ecrx:%d ecry:%d\n", X, Y, ECR_X, ECR_Y);
 		}
 		(ECR_Y)++;
-		ft_resting_posy(elem);
 	}
-//	free(windows);
+	ft_resting_posy(elem);
+	ft_resting_posx(elem);
+	ECR_Y = 0;
+	ECR_X = 0;
+//dprintf(1, "*** FAIL:%c: ***\n", elem->id);
 	return (0);
 }
+
+/*
+ *	Il faut retracer le coportement de ft_push_tetriminos 
+ *		savoir sur combien il se deplace par fenetre
+ *		qu'est ce qu'il se passe quand il dit non et donc pourquoi
+ *		est-ce qu'il y a bien un reset
+ *		pourquoi la taille minimal de fenetre est plus que une
+ */

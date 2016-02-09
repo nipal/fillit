@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:03:34 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/08 17:16:07 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/08 23:49:04 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	ft_print_result(t_tetriminos *begin)
 print_all_tetris(begin);
 print_ground(glb_ground(GET, 0));
 dprintf(1, "len_tetri:%d\n", ft_tetrilen(begin) + 1);
+dprintf(1, "dim_sqr_result:%d\n", glb_sqr_dim(GET, 0));
 	pos = create_coordone();
 	len = glb_sqr_dim(GET, 0) - 1;
 	result = ft_init_str_result(len);

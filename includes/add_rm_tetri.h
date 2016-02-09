@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 19:09:50 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/08 17:35:55 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/08 23:59:04 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # define ECR_Y elem->ecr->y
 # define ECR_X elem->ecr->x
 
-unsigned	long	ft_working_window(t_sqare *gr, t_coordone *pos);
-unsigned	long	*ft_init_windows(t_coordone *pos, int stage);
+unsigned	long	ft_working_window(t_sqare *gr, int x, int y);
+void				ft_init_windows(unsigned long *windows, int stage);
 void				ft_remouve_tetris(t_tetriminos *elem);
 int					ft_set_tetris(t_tetriminos *elem, int x, int y);
 int					ft_push_tetriminos(t_tetriminos *elem);
