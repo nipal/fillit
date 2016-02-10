@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 06:46:52 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/07 23:26:27 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/10 20:37:01 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	describe_tetris(t_tetriminos *tetris)
 	dprintf(1, "gap  :%d\n", tetris->gap);
 	print_coordone(tetris->dim, " dim");
 	print_coordone(tetris->pos, " pos");
+	print_coordone(tetris->ecr, " ecr");
 }
 
 void	print_all_tetris(t_tetriminos *tetris)

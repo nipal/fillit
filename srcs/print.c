@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:03:34 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/08 23:49:04 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/10 22:09:30 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_add_strtetri(t_tetriminos *elem, t_coordone *pos, char *str, int len)
 		while (i < 4)
 		{
 			if (elem->valu & (1 << (i + (8 * j))))
-				str[i + pos->x + ((len + 1) * j + pos->y)] = elem->id;
+				str[i + pos->x + ((len + 1) * (j + pos->y))] = elem->id;
 			i++;
 		}
 		j++;
@@ -60,17 +60,14 @@ void	ft_print_result(t_tetriminos *begin)
 	int					len;
 	char	*result;
 
-print_all_tetris(begin);
-print_ground(glb_ground(GET, 0));
-dprintf(1, "len_tetri:%d\n", ft_tetrilen(begin) + 1);
-dprintf(1, "dim_sqr_result:%d\n", glb_sqr_dim(GET, 0));
+//print_all_tetris(begin);
+//print_ground(glb_ground(GET, 0));
 	pos = create_coordone();
 	len = glb_sqr_dim(GET, 0) - 1;
 	result = ft_init_str_result(len);
 	while (begin)
 	{
-dprintf(1, "print_piece:%c\n", begin->id);
-		copy_coordone(pos, begin->pos);
+		copy_coordone(pos, begin->pos, begin->ecr);
 		ft_resting_posx(begin);
 		ft_resting_posy(begin);
 		ft_add_strtetri(begin, pos, result, len);
