@@ -6,7 +6,7 @@
 /*   By: tboos <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 18:14:15 by tboos             #+#    #+#             */
-/*   Updated: 2016/02/13 09:52:06 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/13 09:59:57 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,6 @@ int	increm_tetris(t_tetriminos *elem)
 	elem->pos->x += 1;
 	elem->valu <<= 1;
 //	print_tetris(elem);
-	if (ft_push_tetriminos(elem))
-	{
-//		print_ground(glb_ground(GET, 0));
-		return (1);
-	}
-	else
-		ft_remouve_tetris(elem);
 //	print_ground(glb_ground(GET, 0));
 	return (0);
 }
@@ -87,8 +80,22 @@ printf("PUUUUUSH\n");
 		{
 			printf("ratee %c\n", turtle->id);
 			increm_tetris(turtle);
-			test = ft_tetriorder(turtle->next, len, stage + 1);
-				return (test);
+			if (ft_push_tetriminos(turtle))
+			{
+				printf("");
+				test = ft_tetriorder(turtle->next, len, stage + 1);
+				if (test)
+					return (test);
+//				print_ground(glb_ground(GET, 0));
+			}
+			else
+			{
+				printf("avant\n");
+	print_ground(glb_ground(GET, 0));
+				ft_remouve_tetris(turtle);
+				printf("apres\n");
+	print_ground(glb_ground(GET, 0));
+			}
 		}
 		else
 		{
