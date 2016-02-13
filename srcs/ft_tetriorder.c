@@ -6,11 +6,13 @@
 /*   By: tboos <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 18:14:15 by tboos             #+#    #+#             */
-/*   Updated: 2016/02/08 17:17:45 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/13 09:52:06 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "header.h"
+# include <stdio.h>
+# include "debug.h"
 
 static t_tetriminos			*ft_findbegin(t_tetriminos *begin)
 {
@@ -39,6 +41,22 @@ static t_tetriminos 	*ft_followrightrabbit(t_tetriminos *rabbit, short *i, int *
 	return (rabbit);
 }
 
+int	increm_tetris(t_tetriminos *elem)
+{
+	elem->pos->x += 1;
+	elem->valu <<= 1;
+//	print_tetris(elem);
+	if (ft_push_tetriminos(elem))
+	{
+//		print_ground(glb_ground(GET, 0));
+		return (1);
+	}
+	else
+		ft_remouve_tetris(elem);
+//	print_ground(glb_ground(GET, 0));
+	return (0);
+}
+
 t_tetriminos			*ft_tetriorder(t_tetriminos *turtle, int len, int stage)
 {
 	short			i;
@@ -46,21 +64,38 @@ t_tetriminos			*ft_tetriorder(t_tetriminos *turtle, int len, int stage)
 	t_tetriminos	*rabbit;
 	t_tetriminos	*test;
 
+dprintf(1, "stage:%d ", stage);
+dprintf(1, "%c dim:%d\n", turtle->id, glb_sqr_dim(GET, 0));
 	if (stage == len && ft_push_tetriminos(turtle))
 		return (ft_findbegin(turtle));
 	else if (stage == len)
 		return (ft_reorder(turtle));
 	i = 0;
 	readymade = 0;
+	rabbit = NULL;
 	while (++i <= len - stage || rabbit)
 	{
-		if (ft_push_tetriminos(turtle))
+		printf("%c ", turtle->id);
+		if (ft_push_tetriminos(turtle) && (test = ft_tetriorder(turtle->next, len, stage + 1)))
 		{
-			if ((test = ft_tetriorder(turtle->next, len, stage + 1)))
+printf("PUUUUUSH\n");
+//dprintf(1, "stage:%d\n", stage);
+//dprintf(1, "%c\n", turtle->id);
+				return (test);
+		}
+		else if (stage == 0)
+		{
+			printf("ratee %c\n", turtle->id);
+			increm_tetris(turtle);
+			test = ft_tetriorder(turtle->next, len, stage + 1);
 				return (test);
 		}
 		else
+		{
+			if (stage == 0)
+				printf("finish for :%c\n", turtle->id);
 			return (ft_reorder(turtle));
+		}
 		rabbit = ft_followrightrabbit(turtle, &i, &readymade);
 		ft_tetriswap(turtle, rabbit);
 		if (rabbit)

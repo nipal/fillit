@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:11:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/09 01:53:07 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/13 09:20:27 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,21 +105,18 @@ int	ft_push_tetriminos(t_tetriminos *elem)
 	nb_windows = glb_nb_windows(GET, 0);
 	dim = glb_sqr_dim(GET, 0);
 	ECR_X = 0;
-//dprintf(1, "ecr_x:%d	ecr_y:%d\n", ECR_X, ECR_Y);
-//dprintf(1, "nb_windows:%d\n", nb_windows);
 	while (ECR_Y < nb_windows)
 	{
 		ft_init_windows(windows, ECR_Y);
 		while ((Y < 8 - DIM_Y) && Y + (4 * ECR_Y) < dim - DIM_Y)
 		{
-//dprintf(1, "		ecr	X:%d\n", ECR_X);
 			while(ECR_X < nb_windows)
 			{
 				if (ft_last_loop(elem, dim, windows))
 					return (1);
 			}
 			ECR_X = 0;
-	//		ft_resting_posx(elem);
+			ft_resting_posx(elem);
 			elem->valu <<= 8;
 			(Y)++;
 //dprintf(1, "CHANGEMANE DE LIIIIIGNE x:%d y:%d ecrx:%d ecry:%d\n", X, Y, ECR_X, ECR_Y);
