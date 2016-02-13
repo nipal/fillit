@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:11:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/13 12:12:02 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/13 22:59:56 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int		ft_last_loop(t_tetriminos *elem, int dim, unsigned long *windows)
 {
 	while ((X < 8 - DIM_X) && X + (4 * ECR_X) < dim - DIM_X)
 	{
-printf("x:%d y:%d\n", ECR_X, ECR_Y);
 		if ((elem->valu & windows[ECR_X]) == 0)
 		{
 			ft_set_tetris(elem, ECR_X, ECR_Y);
@@ -109,13 +108,9 @@ int	ft_push_tetriminos(t_tetriminos *elem)
 	ECR_X = 0;
 	while (ECR_Y < nb_windows)
 	{
-//printf("ECR_Y:%d\n", ECR_Y);
-printf("		y:%d x:%d\n", ECR_Y, ECR_X);
 		ft_init_windows(windows, ECR_Y);
-//print_working_windows(windows);
 		while ((Y < 8 - DIM_Y) && Y + (4 * ECR_Y) < dim - DIM_Y)
 		{
-printf("	y:%d x:%d\n", ECR_Y, ECR_X);
 			while(ECR_X < nb_windows)
 			{
 				if (ft_last_loop(elem, dim, windows))
@@ -124,13 +119,11 @@ printf("	y:%d x:%d\n", ECR_Y, ECR_X);
 			ft_resting_posx(elem);
 			}
 			ECR_X = 0;
-			ft_resting_posx(elem);
 			elem->valu <<= 8;
 			(Y)++;
-//dprintf(1, "CHANGEMANE DE LIIIIIGNE x:%d y:%d ecrx:%d ecry:%d\n", X, Y, ECR_X, ECR_Y);
 		}
-			ECR_X = 0;
-			ft_resting_posx(elem);
+		ft_resting_posy(elem);
+		ft_resting_posx(elem);
 		(ECR_Y)++;
 	}
 	ft_resting_posy(elem);
