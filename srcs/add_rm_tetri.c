@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:11:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/13 09:20:27 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/13 12:12:02 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int		ft_set_tetris(t_tetriminos *t, int x, int y)
 	gr = glb_ground(GET, 0);
 	x *= 4;
 	y *= 4;
+//	printf("set_tetrisx:%d y:%d\n", x, y);
 	mv = get_vertical_mask(8 - x);
 	mh = get_horizontal_mask(8 - y);
 	gr->area[0][0] ^= (t->valu & mv & mh) << (x + (8 * y));
@@ -81,6 +82,7 @@ int		ft_last_loop(t_tetriminos *elem, int dim, unsigned long *windows)
 {
 	while ((X < 8 - DIM_X) && X + (4 * ECR_X) < dim - DIM_X)
 	{
+printf("x:%d y:%d\n", ECR_X, ECR_Y);
 		if ((elem->valu & windows[ECR_X]) == 0)
 		{
 			ft_set_tetris(elem, ECR_X, ECR_Y);
@@ -107,13 +109,19 @@ int	ft_push_tetriminos(t_tetriminos *elem)
 	ECR_X = 0;
 	while (ECR_Y < nb_windows)
 	{
+//printf("ECR_Y:%d\n", ECR_Y);
+printf("		y:%d x:%d\n", ECR_Y, ECR_X);
 		ft_init_windows(windows, ECR_Y);
+//print_working_windows(windows);
 		while ((Y < 8 - DIM_Y) && Y + (4 * ECR_Y) < dim - DIM_Y)
 		{
+printf("	y:%d x:%d\n", ECR_Y, ECR_X);
 			while(ECR_X < nb_windows)
 			{
 				if (ft_last_loop(elem, dim, windows))
 					return (1);
+
+			ft_resting_posx(elem);
 			}
 			ECR_X = 0;
 			ft_resting_posx(elem);
@@ -121,6 +129,8 @@ int	ft_push_tetriminos(t_tetriminos *elem)
 			(Y)++;
 //dprintf(1, "CHANGEMANE DE LIIIIIGNE x:%d y:%d ecrx:%d ecry:%d\n", X, Y, ECR_X, ECR_Y);
 		}
+			ECR_X = 0;
+			ft_resting_posx(elem);
 		(ECR_Y)++;
 	}
 	ft_resting_posy(elem);
