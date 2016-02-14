@@ -27,6 +27,7 @@ S =		add_rm_tetri.c\
 		manip_bin.c\
 		print.c\
 		square_result.c\
+		windows.c\
 		tetriminos.c
 
 D =		tetriminos.c\
