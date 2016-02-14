@@ -1,5 +1,0 @@
-- Votre exécutable doit prendre en paramètre un (et un seul) fichier décrivant la liste
-des Tetriminos à agencer.
-- Si le nombre de paramètres passés à votre executable est différent de 1, votre programme doit afficher son usage et quitter proprement.
-- Chaque description d’un Tetriminos est sur 4 lignes et deux Tetriminos sont séparés par une ligne vide.
-- Si incorrect, afficher : error\n puis exit
