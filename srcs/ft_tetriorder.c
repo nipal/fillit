@@ -6,7 +6,7 @@
 /*   By: tboos <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 18:14:15 by tboos             #+#    #+#             */
-/*   Updated: 2016/02/14 12:41:03 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/14 14:10:23 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,32 +55,62 @@ t_tetriminos			*ft_tetriorder(t_tetriminos *turtle, int len, int stage)
 	t_tetriminos	*rabbit;
 	t_tetriminos	*test;
 
+//dprintf(1, "stage:%d ", stage);
+//dprintf(1, "%c dim:%d\n", turtle->id, glb_sqr_dim(GET, 0));
 	if (stage == len && ft_push_tetriminos(turtle))
 		return (ft_findbegin(turtle));
 	else if (stage == len)
+	{
+//		print_ground(glb_ground(GET, 0));
 		return (ft_reorder(turtle));
+	}
 	i = 0;
 	readymade = 0;
 	rabbit = NULL;
 	while (++i <= len - stage || rabbit)
 	{
+//		printf("%c ", turtle->id);
 		if (ft_push_tetriminos(turtle))
 		{
 			if ((test = ft_tetriorder(turtle->next, len, stage + 1)))
+			{
+//printf("PUUUUUSH\n");
+//dprintf(1, "stage:%d\n", stage);
+//dprintf(1, "%c\n", turtle->id);
 				return (test);
+			}
 			else if (stage == 0)
 			{
+		//		printf("ratee %c\n", turtle->id);
 				increm_tetris(turtle);
 				if (ft_push_tetriminos(turtle))
 				{
+		//			printf("");
 					test = ft_tetriorder(turtle->next, len, stage + 1);
 					if (test)
 						return (test);
+					else
+					{
+		//				printf("avant\n");
+	//		print_ground(glb_ground(GET, 0));
+			//			ft_remouve_tetris(turtle);
+	//					printf("apres\n");
+	//		print_ground(glb_ground(GET, 0));
+					}
+
+	//				print_ground(glb_ground(GET, 0));
 				}
 			}
 		}
 		else
+		{
+//			printf("size:%d\n", glb_sqr_dim(GET, 0));
+//			if (turtle->id == 'A')
+//			print_ground(glb_ground(GET, 0));
+//			if (stage == 0)
+//				printf("finish for :%c\n", turtle->id);
 			return (ft_reorder(turtle));
+		}
 		rabbit = ft_followrightrabbit(turtle, &i, &readymade);
 		ft_tetriswap(turtle, rabbit);
 		if (rabbit)
