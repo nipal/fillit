@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 06:51:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/27 09:24:03 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/14 17:03:11 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <unistd.h>
 # include "tetriminos.h"
 # include "filling.h"
-# include "debug.h"
+# include "glb.h"
 
 int				fillit_structure(int fd);
 t_tetriminos	*get_next_piece(int fd, int id);

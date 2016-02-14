@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 21:51:14 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/14 04:53:03 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/14 16:26:09 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int		glb_sqr_dim(int mode, int value)
 		return (sqr_dim);
 	else if (mode & SET)
 	{
-//dprintf(1, "ON SETTTTTT :::%d\n", value);
 		ground = glb_ground(GET, 0);
 		ground->dim = value;
 		glb_nb_windows(SET, value);

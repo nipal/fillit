@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:23:53 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/14 04:53:29 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/14 16:23:49 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int				fillit_structure(int fd)
 	first_tetris = get_the_pieces(fd);
 	if (!first_tetris)
 		return (-1);
-//print_all_tetris(first_tetris);
 	glb_ground(SET, ft_create_square());
 	first_tetris = ft_squ_lunch(first_tetris, ft_tetrilen(first_tetris));
 	ft_print_result(first_tetris);

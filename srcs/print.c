@@ -6,14 +6,12 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:03:34 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/10 22:09:30 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/14 16:20:40 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
-#include <stdio.h>
 #include "header.h"
-#include "debug.h"
 
 char	*ft_init_str_result(int len)
 {
@@ -60,8 +58,6 @@ void	ft_print_result(t_tetriminos *begin)
 	int					len;
 	char	*result;
 
-//print_all_tetris(begin);
-//print_ground(glb_ground(GET, 0));
 	pos = create_coordone();
 	len = glb_sqr_dim(GET, 0) - 1;
 	result = ft_init_str_result(len);
@@ -74,7 +70,6 @@ void	ft_print_result(t_tetriminos *begin)
 		begin = begin->next;
 	}
 	ft_putstr(result);
-//printf("###############################################:	%s\n", result);
 	free(result);
 	free(pos);
 }

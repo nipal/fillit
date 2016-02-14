@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 20:05:26 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/07 23:26:51 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/14 16:25:32 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ unsigned	long	get_vertical_mask(int size)
 				i++;
 			}
 			j++;
-		} 
+		}
 	}
 	return (masks[size]);
 }
@@ -63,7 +63,7 @@ unsigned	long	get_horizontal_mask(int size)
 				i++;
 			}
 			j++;
-		} 
+		}
 	}
 	return (masks[size]);
 }
