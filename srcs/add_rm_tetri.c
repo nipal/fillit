@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:11:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/14 06:29:55 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/14 12:47:44 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ int		ft_set_tetris(t_tetriminos *t, int x, int y)
 
 void	ft_remouve_tetris(t_tetriminos *tetri)
 {
-	ft_set_tetris(tetri, tetri->ecr->x, tetri->ecr->y);
+	ft_set_tetris(tetri, tetri->xs, tetri->ys);
 	ft_resting_posx(tetri);
 	ft_resting_posy(tetri);
-	tetri->ecr->x = 0;
-	tetri->ecr->y = 0;
+	tetri->xs = 0;
+	tetri->ys = 0;
 }
 
 int		ft_last_loop(t_tetriminos *elem, int dim, unsigned long *windows)
@@ -104,17 +104,17 @@ void	ft_init_pos(t_tetriminos *elem)
 	prev = elem->prev;
 	if (prev)
 	{
-		if ((prev->pos->x + elem->dim->x) < 8)
-			elem->pos->x = prev->pos->x;
+		if ((prev->xp + elem->xd) < 8)
+			elem->xp = prev->xp;
 		else
-			elem->pos->x = 8 - elem->dim->x;
-		if ((prev->pos->y + elem->dim->y) < 8)
-			elem->pos->y = prev->pos->y;
+			elem->xp = 8 - elem->xd;
+		if ((prev->yp + elem->yd) < 8)
+			elem->yp = prev->yp;
 		else
-			elem->pos->y = 8 - elem->dim->y;
-		elem->ecr->x = prev->ecr->x;
-		elem->ecr->y = prev->ecr->y;
-		elem->valu <<= elem->pos->x + (8 * elem->pos->y);
+			elem->yp = 8 - elem->yd;
+		elem->xs = prev->xs;
+		elem->ys = prev->ys;
+		elem->valu <<= elem->xp + (8 * elem->yp);
 	}
 }
 
@@ -151,14 +151,5 @@ int	ft_push_tetriminos(t_tetriminos *elem)
 	ft_resting_posx(elem);
 	ECR_Y = 0;
 	ECR_X = 0;
-//dprintf(1, "*** FAIL:%c: ***\n", elem->id);
 	return (0);
 }
-
-/*
- *	Il faut retracer le coportement de ft_push_tetriminos 
- *		savoir sur combien il se deplace par fenetre
- *		qu'est ce qu'il se passe quand il dit non et donc pourquoi
- *		est-ce qu'il y a bien un reset
- *		pourquoi la taille minimal de fenetre est plus que une
- */

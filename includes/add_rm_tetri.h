@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 19:09:50 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/13 12:12:03 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/14 12:47:32 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 # include "manip_bin.h"
 # include "glb.h"
 
-# define Y elem->pos->y
-# define X elem->pos->x
-# define DIM_X elem->dim->x
-# define DIM_Y elem->dim->y
-# define ECR_Y elem->ecr->y
-# define ECR_X elem->ecr->x
+# define Y elem->yp
+# define X elem->xp
+# define DIM_X elem->xd
+# define DIM_Y elem->yd
+# define ECR_Y elem->ys
+# define ECR_X elem->xs
 
 unsigned	long	ft_working_window(t_sqare *gr, int x, int y);
 void				ft_init_windows(unsigned long *windows, int stage);

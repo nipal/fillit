@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 06:15:34 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/08 00:45:31 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/14 14:01:04 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@ struct				s_tetriminos
 	char			id;
 	int				type;
 	int				gap;
-	t_coordone		*dim;
-	t_coordone		*pos;
-	t_coordone		*ecr;
+	int				xp;
+	int				yp;
+	int				xd;
+	int				yd;
+	int				xs;
+	int				ys;
 };
 
 t_tetriminos		*create_tetriminos(int id);

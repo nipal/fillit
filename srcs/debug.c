@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 06:46:52 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/13 12:12:03 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/14 12:45:24 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ void	print_tetris(t_tetriminos *piece)
 	}
 }
 
-void	print_coordone(t_coordone *pos, char *name)
+void	print_coordone(int x, int y, char *name)
 {
-	dprintf(1, "%s: x:%d ", name, pos->x);
-	dprintf(1, "%s: y:%d\n", name, pos->y);
+	dprintf(1, "%s: x:%d ", name, x);
+	dprintf(1, "%s: y:%d\n", name, y);
 }
 
 void	describe_tetris(t_tetriminos *tetris)
@@ -99,9 +99,9 @@ void	describe_tetris(t_tetriminos *tetris)
 	dprintf(1, "id   :%c   ", tetris->id);
 	dprintf(1, "type :%d   ", tetris->type);
 	dprintf(1, "gap  :%d\n", tetris->gap);
-	print_coordone(tetris->dim, " dim");
-	print_coordone(tetris->pos, " pos");
-	print_coordone(tetris->ecr, " ecr");
+	print_coordone(tetris->xd, tetris->yd, " dim");
+	print_coordone(tetris->xp, tetris->yp, " pos");
+	print_coordone(tetris->xs, tetris->ys, " ecr");
 }
 
 void	print_all_tetris(t_tetriminos *tetris)

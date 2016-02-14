@@ -1,0 +1,4 @@
+rm -f nothing
+rm -f fillit 
+gcc _generateur_fillit.c -o generateur
+gcc -Wall -Wextra -Werror srcs/add_rm_tetri.c srcs/coordone.c srcs/debug.c srcs/error.c srcs/filling.c srcs/fillit_structure.c srcs/ft_reorder.c srcs/ft_tetrilen.c srcs/ft_tetriorder.c srcs/glb.c srcs/main.c srcs/manip_bin.c srcs/print.c srcs/square_result.c srcs/tetriminos.c -I includes libft.a -o fillit

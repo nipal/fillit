@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:11:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/13 09:20:27 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/14 06:29:55 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,11 @@ int		ft_set_tetris(t_tetriminos *t, int x, int y)
 	unsigned	long	mh;
 	unsigned	long	mv;
 	t_sqare				*gr;
-
+	
 	gr = glb_ground(GET, 0);
 	x *= 4;
 	y *= 4;
+//	printf("set_tetrisx:%d y:%d\n", x, y);
 	mv = get_vertical_mask(8 - x);
 	mh = get_horizontal_mask(8 - y);
 	gr->area[0][0] ^= (t->valu & mv & mh) << (x + (8 * y));
@@ -96,6 +97,27 @@ int		ft_last_loop(t_tetriminos *elem, int dim, unsigned long *windows)
 	return (0);
 }
 
+void	ft_init_pos(t_tetriminos *elem)
+{
+	t_tetriminos *prev;
+
+	prev = elem->prev;
+	if (prev)
+	{
+		if ((prev->pos->x + elem->dim->x) < 8)
+			elem->pos->x = prev->pos->x;
+		else
+			elem->pos->x = 8 - elem->dim->x;
+		if ((prev->pos->y + elem->dim->y) < 8)
+			elem->pos->y = prev->pos->y;
+		else
+			elem->pos->y = 8 - elem->dim->y;
+		elem->ecr->x = prev->ecr->x;
+		elem->ecr->y = prev->ecr->y;
+		elem->valu <<= elem->pos->x + (8 * elem->pos->y);
+	}
+}
+
 int	ft_push_tetriminos(t_tetriminos *elem)
 {
 	unsigned	long	windows[3];
@@ -104,7 +126,7 @@ int	ft_push_tetriminos(t_tetriminos *elem)
 
 	nb_windows = glb_nb_windows(GET, 0);
 	dim = glb_sqr_dim(GET, 0);
-	ECR_X = 0;
+	ft_init_pos(elem);
 	while (ECR_Y < nb_windows)
 	{
 		ft_init_windows(windows, ECR_Y);
@@ -114,13 +136,15 @@ int	ft_push_tetriminos(t_tetriminos *elem)
 			{
 				if (ft_last_loop(elem, dim, windows))
 					return (1);
+
+			ft_resting_posx(elem);
 			}
 			ECR_X = 0;
-			ft_resting_posx(elem);
 			elem->valu <<= 8;
 			(Y)++;
-//dprintf(1, "CHANGEMANE DE LIIIIIGNE x:%d y:%d ecrx:%d ecry:%d\n", X, Y, ECR_X, ECR_Y);
 		}
+		ft_resting_posy(elem);
+		ft_resting_posx(elem);
 		(ECR_Y)++;
 	}
 	ft_resting_posy(elem);
@@ -187,7 +211,7 @@ void			copy_coordone(t_coordone *pos_dst, t_coordone *pos_src1, t_coordone *pos_
 /*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 06:46:52 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/13 09:20:28 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/13 12:12:03 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -416,7 +440,7 @@ int				style_alive(char *str)
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:23:53 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/06 20:09:23 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/14 04:53:29 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -484,6 +508,8 @@ int				fillit_structure(int fd)
 	glb_ground(SET, ft_create_square());
 	first_tetris = ft_squ_lunch(first_tetris, ft_tetrilen(first_tetris));
 	ft_print_result(first_tetris);
+	tetris_free(first_tetris);
+	glb_ground(FREE, 0);
 	return (0);
 }
 /* ************************************************************************** */
@@ -585,7 +611,7 @@ int				ft_tetrilen(t_tetriminos *begin)
 /*   By: tboos <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 18:14:15 by tboos             #+#    #+#             */
-/*   Updated: 2016/02/13 09:25:53 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/13 23:05:13 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -625,13 +651,6 @@ int	increm_tetris(t_tetriminos *elem)
 	elem->pos->x += 1;
 	elem->valu <<= 1;
 //	print_tetris(elem);
-	if (ft_push_tetriminos(elem))
-	{
-//		print_ground(glb_ground(GET, 0));
-		return (1);
-	}
-	else
-		ft_remouve_tetris(elem);
 //	print_ground(glb_ground(GET, 0));
 	return (0);
 }
@@ -643,27 +662,62 @@ t_tetriminos			*ft_tetriorder(t_tetriminos *turtle, int len, int stage)
 	t_tetriminos	*rabbit;
 	t_tetriminos	*test;
 
-dprintf(1, "stage:%d ", stage);
-dprintf(1, "%c dim:%d\n", turtle->id, glb_sqr_dim(GET, 0));
+//dprintf(1, "stage:%d ", stage);
+//dprintf(1, "%c dim:%d\n", turtle->id, glb_sqr_dim(GET, 0));
 	if (stage == len && ft_push_tetriminos(turtle))
 		return (ft_findbegin(turtle));
 	else if (stage == len)
+	{
+//		print_ground(glb_ground(GET, 0));
 		return (ft_reorder(turtle));
+	}
 	i = 0;
 	readymade = 0;
 	rabbit = NULL;
 	while (++i <= len - stage || rabbit)
 	{
-		if (ft_push_tetriminos(turtle) && (test = ft_tetriorder(turtle->next, len, stage + 1)))
+//		printf("%c ", turtle->id);
+		if (ft_push_tetriminos(turtle))
 		{
+			if ((test = ft_tetriorder(turtle->next, len, stage + 1)))
+			{
+//printf("PUUUUUSH\n");
 //dprintf(1, "stage:%d\n", stage);
 //dprintf(1, "%c\n", turtle->id);
 				return (test);
+			}
+			else if (stage == 0)
+			{
+		//		printf("ratee %c\n", turtle->id);
+				increm_tetris(turtle);
+				if (ft_push_tetriminos(turtle))
+				{
+		//			printf("");
+					test = ft_tetriorder(turtle->next, len, stage + 1);
+					if (test)
+						return (test);
+					else
+					{
+		//				printf("avant\n");
+	//		print_ground(glb_ground(GET, 0));
+			//			ft_remouve_tetris(turtle);
+	//					printf("apres\n");
+	//		print_ground(glb_ground(GET, 0));
+					}
+
+	//				print_ground(glb_ground(GET, 0));
+				}
+			}
 		}
-		if (stage == 0 && increm_tetris(turtle) && (test = ft_tetriorder(turtle->next, len, stage + 1)))
-				return (test);
 		else
+		{
+//			printf("size:%d\n", glb_sqr_dim(GET, 0));
+//			if (turtle->id == 'A')
+//			print_ground(glb_ground(GET, 0));
+//			if (stage == 0)
+//				printf("finish for :%c\n", turtle->id);
 			return (ft_reorder(turtle));
+		}
 		rabbit = ft_followrightrabbit(turtle, &i, &readymade);
 		ft_tetriswap(turtle, rabbit);
 		if (rabbit)
@@ -745,7 +799,7 @@ t_tetriminos			*ft_squ_lunch(t_tetriminos *begin, int len)
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 21:51:14 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/06 20:00:42 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/14 04:53:03 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -800,8 +854,14 @@ t_sqare	*glb_ground(int mode, t_sqare *value)
 		glb_sqr_dim(SET, ground->dim);
 		return (ground);
 	}
-	else
-		return (NULL);
+	else if (mode & FREE)
+	{
+		free(ground->area[0]);
+		free(ground->area[1]);
+		free(ground->area);
+		free(ground);
+	}
+	return (NULL);
 }
 /* ************************************************************************** */
 /*                                                                            */
@@ -1012,7 +1072,7 @@ void	ft_print_result(t_tetriminos *begin)
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:23:53 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/05 06:18:56 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/14 04:53:12 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /*                                                                            */
 /* ************************************************************************** */

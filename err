@@ -1,0 +1,26 @@
+srcs/debug.c:89:6: error: conflicting types for 'print_coordone'
+void    print_coordone(int x, int y, char *name)
+        ^
+includes/debug.h:22:6: note: previous declaration is here
+void    print_coordone(t_coordone *pos, char *name);
+        ^
+srcs/debug.c:102:41: error: too many arguments to function call, expected 2, have 3
+        print_coordone(tetris->xd, tetris->yd, " dim");
+        ~~~~~~~~~~~~~~                         ^~~~~~
+includes/debug.h:22:1: note: 'print_coordone' declared here
+void    print_coordone(t_coordone *pos, char *name);
+^
+srcs/debug.c:103:41: error: too many arguments to function call, expected 2, have 3
+        print_coordone(tetris->xp, tetris->yp, " pos");
+        ~~~~~~~~~~~~~~                         ^~~~~~
+includes/debug.h:22:1: note: 'print_coordone' declared here
+void    print_coordone(t_coordone *pos, char *name);
+^
+srcs/debug.c:104:41: error: too many arguments to function call, expected 2, have 3
+        print_coordone(tetris->xs, tetris->ys, " ecr");
+        ~~~~~~~~~~~~~~                         ^~~~~~
+includes/debug.h:22:1: note: 'print_coordone' declared here
+void    print_coordone(t_coordone *pos, char *name);
+^
+4 errors generated.
+make: *** [fillit] Error 1

@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 06:06:49 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/07 23:16:24 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/14 14:01:27 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,10 @@ t_tetriminos	*create_tetriminos(int id)
 	t_tetriminos	*piece;
 	if (!(piece = (t_tetriminos*)malloc(sizeof(t_tetriminos))))
 		return (NULL);
-	if (!(piece->dim = create_coordone()) || !(piece->pos = create_coordone())
-		|| !(piece->ecr = create_coordone()))
-		return (NULL);
 	piece->id = id + 'A';
 	piece->valu = 0;
-	piece->pos->x = 8;
-	piece->pos->y = 8;
+	piece->xp = 8;
+	piece->yp = 8;
 	piece->next = NULL;
 	piece->prev = NULL;
 	return (piece);
@@ -61,9 +58,6 @@ int	tetris_free(t_tetriminos *elem)
 		while (elem)
 		{
 			save = (elem)->next;
-			free(elem->ecr);
-			free(elem->pos);
-			free(elem->dim);
 			free(elem);
 			elem = save;
 		}
@@ -73,12 +67,12 @@ int	tetris_free(t_tetriminos *elem)
 
 void			finished_tetriminos(t_tetriminos *tetris)
 {
-	tetris->gap = (tetris->gap % 5) - tetris->pos->x; 
-	tetris->dim->x = tetris->dim->x - tetris->pos->x + 1;
-	tetris->dim->y = tetris->dim->y - tetris->pos->y + 1;
-	tetris->valu = tetris->valu >> (tetris->pos->x + (tetris->pos->y * 8));
-	tetris->pos->x = 0;
-	tetris->pos->y = 0;
+	tetris->gap = (tetris->gap % 5) - tetris->xp; 
+	tetris->xd = tetris->xd - tetris->xp + 1;
+	tetris->yd = tetris->yd - tetris->yp + 1;
+	tetris->valu = tetris->valu >> (tetris->xp + (tetris->yp * 8));
+	tetris->xp = 0;
+	tetris->yp = 0;
 }
 
 t_tetriminos	*tetris_push_front(t_tetriminos *begin, t_tetriminos *elem)

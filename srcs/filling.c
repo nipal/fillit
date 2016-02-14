@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 07:38:47 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/04 20:21:28 by tboos            ###   ########.fr       */
+/*   Updated: 2016/02/14 12:42:47 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void			actual_mini_maxi(t_tetriminos *tetris, int i)
 
 	x = i % 5;
 	y = i / 5;
-	if (x < tetris->pos->x)
-		tetris->pos->x = x;
-	if (y < tetris->pos->y)
-		tetris->pos->y = y;
-	if (x > tetris->dim->x)
-		tetris->dim->x = x;
-	if (y > tetris->dim->y)
-		tetris->dim->y = y;
+	if (x < tetris->xp)
+		tetris->xp = x;
+	if (y < tetris->yp)
+		tetris->yp = y;
+	if (x > tetris->xd)
+		tetris->xd = x;
+	if (y > tetris->yd)
+		tetris->yd = y;
 }
 
 int				first_case(char *str)
