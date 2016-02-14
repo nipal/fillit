@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 21:53:00 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/05 04:24:13 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/14 04:53:08 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define GLB_H
 # define GET 1
 # define SET 2
+# define FREE 4
 # include <stdlib.h>
 # include "square_result.h"
 

@@ -6,7 +6,7 @@
 /*   By: fjanoty <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 21:51:14 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/06 20:00:42 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/14 04:53:03 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ t_sqare	*glb_ground(int mode, t_sqare *value)
 		glb_sqr_dim(SET, ground->dim);
 		return (ground);
 	}
-	else
-		return (NULL);
+	else if (mode & FREE)
+	{
+		free(ground->area[0]);
+		free(ground->area[1]);
+		free(ground->area);
+		free(ground);
+	}
+	return (NULL);
 }
