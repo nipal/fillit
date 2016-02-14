@@ -1,0 +1,41 @@
+main -> si argc != 2 || erreur de map (breack du fonctionnement et set err < 0)
+        -> error\n
+        si argc == 2 
+        -> fillit_structure(fd)
+fillit_structure(fd)
+    -> initialisation de ft_error(INIT) en variable static
+    -> begin = get_the_pieces(fd)
+        -> tetris_push_back -appelle push front- (get_next_piece(fd, nb)) en boucle par piece 
+		(OPTI en un appel systeme de lecture)
+            -> get_next_piece cree un elem (check-SET error si NULL) et met son id en commencant par 'A'
+            -> get_next_piece read 20 char et stock dans str[21] (check-SET error si oct_lu != 20 et free(tetris))
+            -> get_next_piece search_the_diese(str, tetris, *oct_lu = 0, tetris->gap = first_case(str))
+                    -> first_case check la map jusqu'au premier et renvoie -1 si \n ou . pas au bon endroit
+                    -> first_case renvoie premier diese et enregistre son index dans str
+                TEST !!!! index = -1... search_the_diese cherche les dieses (renvoyer 20 (pas de diese))
+				(OPTI ne pas check en haut)
+				(TEST attention au faux caractere ne jutant pas un #)
+                -> search_the_diese remplace # par .
+                -> search_the_diese tetri->valu (unsigned long) = 1 << (i % 5 + (i / 5) * 8) (ligne puis colonne)
+                -> search_the_diese incremente nb (de #)
+                -> search_the_diese actual_mini_maxi(tetris, index)
+                    -> actual_mini_maxi set le dimention et position en x et y
+                -> search_the_diese recur en x-1, x+1, y-1, y+1 si dans les clous
+                -> search_next_piece si pas # set id a 0 pour gestion d'erreur
+            -> get_next_piece set erreur et free la piece si # != 4 ou id == 0 ou style_alive return alors NULL
+            -> get_next_piece finished_tetriminos(piece)
+                -> retranche la position a la dimention en x et y
+                -> decale la piece en valu > (posx + 8 * posy)
+                -> set a 0 la position x et y
+                -> tetris_define_type(piece)
+                    -> check type et set tetritype sur le mm que le correspondant ou max << 1
+            -> get_next_piece return tetris
+        -> tetris_push_front gere la liste pour concat la piece preparee
+		-> get_the_pieces check error et return null apres avoir tetris_free la liste
+		-> return le begin
+
+
+
+:::::	Lapin	:::
+
+Ca serrait marrant de faireun makefile qui compile le projet a differente etape
