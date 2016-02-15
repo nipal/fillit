@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 22:11:42 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/02/14 16:17:51 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/02/15 15:49:59 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,12 @@ void	ft_init_pos(t_tetriminos *elem)
 	t_tetriminos *prev;
 
 	prev = elem->prev;
+	while (prev && prev->type != elem->type)
+		prev = prev->prev;
 	if (prev)
 	{
-		if ((prev->pos->x + elem->dim->x) < 8)
-			elem->pos->x = prev->pos->x;
-		else
-			elem->pos->x = 8 - elem->dim->x;
-		if ((prev->pos->y + elem->dim->y) < 8)
-			elem->pos->y = prev->pos->y;
-		else
-			elem->pos->y = 8 - elem->dim->y;
+		elem->pos->x = prev->pos->x;
+		elem->pos->y = prev->pos->y;
 		elem->ecr->x = prev->ecr->x;
 		elem->ecr->y = prev->ecr->y;
 		elem->valu <<= elem->pos->x + (8 * elem->pos->y);
